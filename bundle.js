@@ -35,8 +35,11 @@ let factory = new Factory("Goose's Factory");
 
 async function createFactory() {
     while (factory.money >= 0) {
+
         factory.GainMoney(factory.gainAmount)
         var money_txt = document.getElementsByClassName("money-count-text")[0];
+        var factory_name_txt = document.getElementById("factory-name");
+        factory_name_txt.textContent = factory.name
         if (Math.round(factory.money) < 1e+21) {
             money_txt.textContent = `\$${Math.round(factory.money).toLocaleString()}`
         } else {

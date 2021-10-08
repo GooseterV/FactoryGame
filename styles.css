@@ -2,7 +2,7 @@
 .money-count-text {
     font-size: 50px;
     color: white;
-    top: 25%;
+    top: 37.5%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -41,4 +41,13 @@ button {
 
 button:hover {
     cursor: pointer !important;
+}
+
+.factory-name {
+    font-size: 60px;
+    color: white;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
