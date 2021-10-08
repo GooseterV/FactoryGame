@@ -5,8 +5,8 @@ class Factory {
         this.money = 0;
         this.multiplier = 1;
         this.level = 1;
-        this.multiUpgradePrice = 0;
-        this.levelUpgradePrice = 0;
+        this.multiUpgradePrice = 25;
+        this.levelUpgradePrice = 50;
         this.gainAmount = 1;
     }
 
@@ -20,13 +20,19 @@ class Factory {
     }
 
     UpgradeMultiplier() {
+        this.money -= this.multiUpgradePrice
         this.multiplier += 1
         this.multiUpgradePrice *= 5
     }
     UpgradeLevel() {
+        this.money -= this.levelUpgradePrice
         this.level += 1
-        this.gainAmount += this.gainAmount / 100 * 75
-        this.levelUpgradePrice *= 2.5
+        if (this.gainAmount == 1) {
+            this.gainAmount = 2
+        }
+        this.gainAmount **= 1.3 //+= this.gainAmount / 100 * 75
+        this.levelUpgradePrice **= 1.275
+        
     }
 }
 
@@ -58,7 +64,7 @@ function upgradeFactory(btn) {
     var stats = document.getElementById("stat-tracker");
     if (btn.id == "multi-upgrade-button") {
         if (factory.money < factory.multiUpgradePrice) {
-            alert(`Not enough money! You need ${factory.multiUpgradePrice - factory.money} more dollars!`)
+            alert(`Not enough money! You need ${Math.round(factory.multiUpgradePrice - factory.money)} more dollars!`)
         }
         if (factory.money >= factory.multiUpgradePrice) {
             factory.UpgradeMultiplier()
@@ -66,7 +72,7 @@ function upgradeFactory(btn) {
     }
     if (btn.id == "level-upgrade-button") {
         if (factory.money < factory.levelUpgradePrice) {
-            alert(`Not enough money! You need ${factory.levelUpgradePrice - factory.money} more dollars!`)
+            alert(`Not enough money! You need ${Math.round(factory.levelUpgradePrice - factory.money)} more dollars!`)
         }
         if (factory.money >= factory.levelUpgradePrice) {
             factory.UpgradeLevel()
