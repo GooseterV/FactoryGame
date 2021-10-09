@@ -23,7 +23,7 @@ class Factory {
     UpgradeMultiplier() {
         this.money -= this.multiUpgradePrice
         this.multiplier += 1
-        this.multiUpgradePrice *= 5
+        this.multiUpgradePrice *= 4
     }
     UpgradeLevel() {
         this.money -= this.levelUpgradePrice
