@@ -17,12 +17,48 @@
     transform: translate(-50%, -50%);
     word-wrap: unset;
 }
+.factory-name {
+    font-size: 60px;
+    color: white;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
 
 html {
     background-color: black;
     font-family: 'Roboto Mono', sans-serif;
 }
-
+@media (min-width: 480px) {
+    html {
+        zoom: 60%;
+    }
+    .stat-tracker {
+        font-size: 30px;
+        word-wrap: unset;
+    }
+    .factory-name {
+        font-size: 35px;
+    }
+}
+@media (min-width: 1090px) {
+    html {
+        zoom:100%;
+    }
+}
+@media (max-width: 480px) {
+    html {
+        zoom: 60%;
+    }
+    .stat-tracker {
+        font-size: 25px;
+        word-wrap: unset;
+    }
+    .factory-name {
+        font-size: 30px;
+    }
+  }
 button {
     border-radius: 15px;
     display: inline-flex;
@@ -41,13 +77,4 @@ button {
 
 button:hover {
     cursor: pointer !important;
-}
-
-.factory-name {
-    font-size: 60px;
-    color: white;
-    top: 25%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
 }
