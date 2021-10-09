@@ -37,15 +37,20 @@ class Factory {
 }
 
 
-let factory = new Factory("Goose's Factory");
+//let factory = new Factory("Goose's Factory");
 
 async function createFactory() {
+    var name_factory_input = prompt("What is your name?")
+    name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
+    let factory = new Factory(`${name_factory_input}'s Factory`);
+    var factory_name_txt = document.getElementById("factory-name");
+    var title = document.getElementsByTagName("title")[0];
+    factory_name_txt.textContent = factory.name
+    title.textContent = `${factory.name} | GFG`
     while (factory.money >= 0) {
 
         factory.GainMoney(factory.gainAmount)
         var money_txt = document.getElementsByClassName("money-count-text")[0];
-        var factory_name_txt = document.getElementById("factory-name");
-        factory_name_txt.textContent = factory.name
         if (Math.round(factory.money) < 1e+21) {
             money_txt.textContent = `\$${Math.round(factory.money).toLocaleString()}`
         } else {
