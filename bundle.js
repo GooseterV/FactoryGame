@@ -31,8 +31,8 @@ class Factory {
         if (this.gainAmount == 1) {
             this.gainAmount = 2
         }
-        this.gainAmount **= 1.3 //+= this.gainAmount / 100 * 75
-        this.levelUpgradePrice **= 1.275
+        this.gainAmount **= 1.35 //+= this.gainAmount / 100 * 75
+        this.levelUpgradePrice **= 1.25
         
     }
 }
