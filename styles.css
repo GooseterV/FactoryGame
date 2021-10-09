@@ -106,6 +106,7 @@ html {
         top:65%;
     }
   }
+
 @media (max-width: 1920px) {
     html {
         zoom:100%;
@@ -113,6 +114,15 @@ html {
     .progress-tracker {
         left:50%;
         top:65%;
+    }
+}
+@media (min-width: 280px) {
+    html {
+        zoom:75%;
+    }
+    .progress-tracker {
+        left:50%;
+        top:69%;
     }
 }
 @media (min-width: 1920px) {
@@ -124,6 +134,9 @@ html {
         top:35%;
     }
 }
+
+
+
 button {
     border-radius: 15px;
     display: inline-flex;
