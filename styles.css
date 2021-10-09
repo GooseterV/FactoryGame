@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 .money-count-text {
     font-size: 50px;
-    color: white;
+    color: #ffffff;
     top: 37.5%;
     left: 50%;
     position: absolute;
@@ -9,7 +9,7 @@
 }
 
 .stat-tracker {
-    color: white;
+    color: #ffffff;
     font-size: 40px;
     top: 50%;
     left: 50%;
@@ -19,7 +19,7 @@
 }
 .factory-name {
     font-size: 60px;
-    color: white;
+    color: #ffffff;
     top: 25%;
     left: 50%;
     position: absolute;
@@ -32,13 +32,13 @@
     top:35%;
     font-family: "Roboto Mono", sans-serif;
     font-size: 25px;
-    color:white;
+    color:#ffffff;
 }
 
 .alert {
     padding: 20px;
     background-color: #f44336;
-    color: white;
+    color: #ffffff;
     opacity: 1;
     transition: opacity 0.6s;
     margin-bottom: 15px;
@@ -47,7 +47,7 @@
 
 .closebtn {
     margin-left: 15px;
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     float: right;
     font-size: 22px;
@@ -58,11 +58,11 @@
   
 
 .closebtn:hover {
-    color: black;
+    color: #000000;
 }
 
 html {
-    background-color: black;
+    background-color: #000000;
     font-family: 'Roboto Mono', sans-serif;
 }
 @media (min-width: 480px) {
