@@ -42,7 +42,7 @@
     opacity: 1;
     transition: opacity 0.6s;
     margin-bottom: 15px;
-  }
+}
   
 
 .closebtn {
@@ -76,10 +76,18 @@ html {
     .factory-name {
         font-size: 35px;
     }
+    .progress-tracker {
+        left:50%;
+        top:65%;
+    }
 }
 @media (min-width: 1090px) {
     html {
         zoom:100%;
+    }
+    .progress-tracker {
+        left:8%;
+        top:35%;
     }
 }
 @media (max-width: 480px) {
@@ -92,6 +100,10 @@ html {
     }
     .factory-name {
         font-size: 30px;
+    }
+    .progress-tracker {
+        left:50%;
+        top:65%;
     }
   }
 button {

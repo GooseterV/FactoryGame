@@ -97,4 +97,5 @@ async function removeWarning(warning) {
     warning.parentElement.style.opacity='0';
     await new Promise(resolve => setTimeout(resolve, 600));
     warning.parentElement.style.display='none';
+    warning.parentElement.style.opacity='1';
 }
