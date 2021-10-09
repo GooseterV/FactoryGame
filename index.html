@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="./bundle.js"></script>
     <link rel="stylesheet" href="./styles.css">
     <link rel="icon" href="./src/g_egg.png">
@@ -17,9 +18,14 @@
 </head>
 
 <body>
+    <div class="alert" id="warning-message" style="display: none;">
+        <span class="closebtn" onclick="removeWarning(this)">&times;</span>
+        Warning: You don't have enough money for this!
+    </div>
     <div class="money-count-text">$0</div>
     <div class="stat-tracker" id="stat-tracker">Level: 1 Multiplier: 1</div>
     <div class="factory-name" id="factory-name">Unowned Factory</div>
+    <div class="progress-tracker" id="upgrade-progress">Next Level: 1<br>Money: $1/$1<br><br>Next Multiplier: 1<br>Price: $1</div>
     <button onClick="createFactory()" id="factory-create-button" class="factory-create-button">Create Factory</button>
     <button onClick="upgradeFactory(this)" id="multi-upgrade-button">Upgrade Multiplier</button>
     <button onClick="upgradeFactory(this)" id="level-upgrade-button">Upgrade Level</button>
