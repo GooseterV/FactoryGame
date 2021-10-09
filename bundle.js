@@ -31,8 +31,8 @@ class Factory {
         if (this.gainAmount == 1) {
             this.gainAmount = 2
         }
-        this.gainAmount **= 1.4 //+= this.gainAmount / 100 * 75
-        this.levelUpgradePrice *= 3.75
+        this.gainAmount **= 1.36 //+= this.gainAmount / 100 * 75
+        this.levelUpgradePrice **= 1.215
         
     }
 }
@@ -56,6 +56,7 @@ async function createFactory() {
             money_txt.textContent = `\$${Math.round(factory.money).toLocaleString()}`
             prog.innerHTML = progtext
         } else {
+            //var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
             money_txt.textContent = `\$${Math.round(factory.money)}`
             prog.innerHTML = progtext
         }
