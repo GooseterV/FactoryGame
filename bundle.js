@@ -35,14 +35,11 @@ class Factory {
         
     }
 }
-
-
+var name_factory_input = prompt("What is your name?")
+name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
+let factory = new Factory(`${name_factory_input}'s Factory`);
 //let factory = new Factory("Goose's Factory");
-
 async function createFactory() {
-    var name_factory_input = prompt("What is your name?")
-    name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
-    let factory = new Factory(`${name_factory_input}'s Factory`);
     var factory_name_txt = document.getElementById("factory-name");
     var title = document.getElementsByTagName("title")[0];
     factory_name_txt.textContent = factory.name
