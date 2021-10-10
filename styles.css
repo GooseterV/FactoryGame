@@ -159,7 +159,6 @@ button {
     font-size: 13px;
     text-align: center;
     text-decoration: none;
-    backface-visibility: hidden;
     border: 0.67rem solid transparent;
     border-radius: 35px;
     text-decoration: none;
