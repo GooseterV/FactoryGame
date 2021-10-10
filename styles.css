@@ -163,6 +163,7 @@ button {
     border: 0.67rem solid transparent;
     border-radius: 35px;
     text-decoration: none;
+    background-color: #ffffff;
 }
 
 button:hover {
