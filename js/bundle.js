@@ -1,4 +1,3 @@
-
 class Factory {
 
     constructor(name) {
@@ -9,6 +8,8 @@ class Factory {
         this.multiUpgradePrice = 25;
         this.levelUpgradePrice = 50;
         this.gainAmount = 1;
+        this.gainInterval = 100;
+        this.isActive = false;
     }
 
 
@@ -23,7 +24,12 @@ class Factory {
     UpgradeMultiplier() {
         this.money -= this.multiUpgradePrice
         this.multiplier += 1
-        this.multiUpgradePrice *= 4
+        if (this.money < 1e+14) {
+            this.multiUpgradePrice *= 4
+        }
+        if (this.money >= 1e+14) {
+            this.multiUpgradePrice *= 8
+        }
     }
     UpgradeLevel() {
         this.money -= this.levelUpgradePrice
@@ -31,11 +37,22 @@ class Factory {
         if (this.gainAmount == 1) {
             this.gainAmount = 2
         }
-        this.gainAmount **= 1.375 //+= this.gainAmount / 100 * 75
-        this.levelUpgradePrice **= 1.22
-        
+
+        if (this.money < 100000000) {
+            this.gainAmount **= 1.380
+            this.levelUpgradePrice **= 1.21
+
+        } else {
+            this.gainAmount **= 1.370
+            this.levelUpgradePrice **= 1.25
+        }
+        if (this.money >= 1e+14) {
+            this.gainAmount **= 1.370
+            this.levelUpgradePrice **= 1.30
+        }
     }
 }
+
 var name_factory_input = prompt("What is the name of your factory?")
 //name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
 let factory = new Factory(`${name_factory_input}`);
@@ -44,10 +61,11 @@ async function createFactory() {
     var factory_name_txt = document.getElementById("factory-name");
     var title = document.getElementsByTagName("title")[0];
     factory_name_txt.textContent = factory.name
+
     title.textContent = `${factory.name} | GFG`
-    
+    factory.isActive = true;
     while (factory.money >= 0) {
-        
+
         factory.GainMoney(factory.gainAmount)
         var prog = document.getElementById("upgrade-progress")
         var money_txt = document.getElementsByClassName("money-count-text")[0];
@@ -60,10 +78,29 @@ async function createFactory() {
             money_txt.textContent = `\$${Math.round(factory.money)}`
             prog.innerHTML = progtext
         }
-        if (document.getElementsByClassName("factory-create-button").length >= 1) {
+        if (document.getElementById("factory-create-button") != null) {
             document.getElementById("factory-create-button").remove();
         }
-        await new Promise(resolve => setTimeout(resolve, 100));
+        var btns = document.getElementsByTagName("button")
+        for (let i = 0; i < btns.length; i++) {
+            if (btns[i].id == "multi-upgrade-button") {
+                if (factory.money < factory.multiUpgradePrice) {
+                    btns[i].className = "expensive";
+                }
+                if (factory.money >= factory.multiUpgradePrice) {
+                    btns[i].className = "purchaseable";
+                }
+            }
+            if (btns[i].id == "level-upgrade-button") {
+                if (factory.money < factory.levelUpgradePrice) {
+                    btns[i].className = "expensive";
+                }
+                if (factory.money >= factory.levelUpgradePrice) {
+                    btns[i].className = "purchaseable";
+                }
+            }
+        }
+        await new Promise(resolve => setTimeout(resolve, factory.gainInterval));
 
         //process.stdout.write(`\r\$${factory.money}`)
     }
@@ -72,6 +109,7 @@ async function createFactory() {
 function upgradeFactory(btn) {
     var stats = document.getElementById("stat-tracker");
     var warning = document.getElementById("warning-message");
+    var cashinterval = document.getElementById("cash-interval");
     if (btn.id == "multi-upgrade-button") {
         if (factory.money < factory.multiUpgradePrice) {
             //alert(`Not enough money! You need ${Math.round(factory.multiUpgradePrice - factory.money)} more dollars!`)
@@ -92,11 +130,12 @@ function upgradeFactory(btn) {
 
     }
     stats.textContent = `Level: ${factory.level} Multiplier: ${factory.multiplier}`
+    cashinterval.textContent = `Cash Per Interval: \$${numeral(Math.round(factory.gainAmount * factory.multiplier)).format('0.0a')}/${factory.gainInterval}ms`
 }
 
 async function removeWarning(warning) {
-    warning.parentElement.style.opacity='0';
+    warning.parentElement.style.opacity = '0';
     await new Promise(resolve => setTimeout(resolve, 600));
-    warning.parentElement.style.display='none';
-    warning.parentElement.style.opacity='1';
+    warning.parentElement.style.display = 'none';
+    warning.parentElement.style.opacity = '1';
 }
