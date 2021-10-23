@@ -38,16 +38,16 @@ class Factory {
             this.gainAmount = 2
         }
 
-        if (this.money < 100000000) {
+        if (this.money < 1e9) {
             this.gainAmount **= 1.380
             this.levelUpgradePrice **= 1.21
 
         }
-        if (this.money >= 1e+14) {
+        else if (this.money >= 1e+14) {
             this.gainAmount **= 1.375
             this.levelUpgradePrice **= 1.30
         }
-        if (this.money >= 1e+20) {
+        else if (this.money >= 1e+20) {
             this.gainAmount **= 1.370
             this.levelUpgradePrice **= 1.35
         }
