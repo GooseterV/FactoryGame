@@ -69,7 +69,7 @@ async function createFactory() {
         factory.GainMoney(factory.gainAmount)
         var prog = document.getElementById("upgrade-progress")
         var money_txt = document.getElementsByClassName("money-count-text")[0];
-        var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
+        var progtext = `Next Level: ${factory.level+1}<br>Money: \$${toNumberName(Math.round(factory.money), "default", true, 1).replace(" ", "")}/\$${toNumberName(Math.round(factory.levelUpgradePrice), "default", true, 1).replace(" ", "")}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${toNumberName(Math.round(factory.money), "default", true, 1).replace(" ", "")}/\$${toNumberName(Math.round(factory.multiUpgradePrice), "default", true, 1).replace(" ", "")}`
         if (Math.round(factory.money) < 1e+21) {
             money_txt.textContent = `\$${Math.round(factory.money).toLocaleString()}`
             prog.innerHTML = progtext
@@ -130,7 +130,7 @@ function upgradeFactory(btn) {
 
     }
     stats.textContent = `Level: ${factory.level} Multiplier: ${factory.multiplier}`
-    cashinterval.textContent = `Cash Per Interval: \$${numeral(Math.round(factory.gainAmount * factory.multiplier)).format('0.0a')}/${factory.gainInterval}ms`
+    cashinterval.textContent = `Cash Per Interval: \$${toNumberName(Math.round(factory.gainAmount * factory.multiplier), "default", true, 1).replace(" ", "")}/${factory.gainInterval}ms`
 }
 
 async function removeWarning(warning) {
