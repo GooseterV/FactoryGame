@@ -42,17 +42,14 @@ class Factory {
             this.gainAmount **= 1.380
             this.levelUpgradePrice **= 1.21
 
-        } else {
-            this.gainAmount **= 1.370
-            this.levelUpgradePrice **= 1.25
         }
         if (this.money >= 1e+14) {
-            this.gainAmount **= 1.370
+            this.gainAmount **= 1.375
             this.levelUpgradePrice **= 1.30
         }
         if (this.money >= 1e+20) {
-            this.gainAmount **= 1.3675
-            this.levelUpgradePrice **= 1.345
+            this.gainAmount **= 1.370
+            this.levelUpgradePrice **= 1.35
         }
     }
 }
