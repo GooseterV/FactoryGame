@@ -72,11 +72,11 @@ async function createFactory() {
         var money_txt = document.getElementsByClassName("money-count-text")[0];
         var progtext = `Next Level: ${factory.level+1}<br>Money: \$${String(toNumberName(Math.round(factory.money), "default", true, 1)).replace(" ", "").toLowerCase()}/\$${String(toNumberName(Math.round(factory.levelUpgradePrice), "default", true, 1)).replace(" ", "").toLowerCase()}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${String(toNumberName(Math.round(factory.money), "default", true, 1)).replace(" ", "").toLowerCase()}/\$${String(toNumberName(Math.round(factory.multiUpgradePrice), "default", true, 1)).replace(" ", "").toLowerCase()}`
         if (Math.round(factory.money) < 1e+21) {
-            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).replace(" ", "").toLowerCase()}`
+            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).toLowerCase()}`
             prog.innerHTML = progtext
         } else {
             //var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
-            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).replace(" ", "").toLowerCase()}`
+            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).toLowerCase()}`
             prog.innerHTML = progtext
         }
         if (document.getElementById("factory-create-button") != null) {
