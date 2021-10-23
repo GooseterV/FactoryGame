@@ -21,7 +21,7 @@ function toNumberName(number, type, abbreviate, decimalPlaces) {
 			["","decillion","vigintillion","trigintillion","quadragintillion","quinquagintillion","sexagintillion","septuagintillion","octogintillion","nonagintillion"],
 			["","centillion","ducentillion","trucentillion","quadringentillion","quingentillion","sescentillion","septingentillion","octingentillion","nongentillion"],
 			["", "deci", "viginti", "triginta", "quadraginta", "quinquaginta", "sexaginta", "septuaginta", "octoginta", "nonaginta"],
-			["K","million","billion","trillion","quadrillion","quintillion","sextillion","septillion","octillion","nonillion"]
+			["thousand","million","billion","trillion","quadrillion","quintillion","sextillion","septillion","octillion","nonillion"]
 		];
 	}
 	let numberName = ["","","",""];
