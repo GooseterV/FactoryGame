@@ -75,7 +75,7 @@ async function createFactory() {
             prog.innerHTML = progtext
         } else {
             //var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
-            money_txt.textContent = `\$${Math.round(factory.money)}`
+            money_txt.textContent = `\$${toNumberName(Math.round(factory.money))}`
             prog.innerHTML = progtext
         }
         if (document.getElementById("factory-create-button") != null) {
