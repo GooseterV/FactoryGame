@@ -117,6 +117,10 @@ html {
         left: 50%;
         top: 65%;
     }
+    .interval-counter {
+        left: 50%;
+        top: 72.5%;
+    }
 }
 
 @media (max-width: 1920px) {
@@ -138,6 +142,10 @@ html {
     .progress-tracker {
         left: 50%;
         top: 69%;
+    }
+    .interval-counter {
+        left: 50%;
+        top: 75%;
     }
 }
 
@@ -228,8 +236,8 @@ button:hover {
 .interval-counter {
     position: absolute;
     transform: translate(-50%, -50%);
-    left: 15%;
-    top: 35%;
+    left: 50%;
+    top: 62.5%;
     font-family: "Roboto Mono", sans-serif;
     font-size: 25px;
     color: #ffffff;
