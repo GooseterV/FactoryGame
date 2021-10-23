@@ -53,7 +53,7 @@ class Factory {
     }
 }
 
-var name_factory_input = prompt("What is the name of your factory?")
+var name_factory_input = prompt("What is the name of your factory?").slice(0, 18)
 //name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
 let factory = new Factory(`${name_factory_input}`);
 //let factory = new Factory("Goose's Factory");
@@ -71,7 +71,7 @@ async function createFactory() {
         var money_txt = document.getElementsByClassName("money-count-text")[0];
         var progtext = `Next Level: ${factory.level+1}<br>Money: \$${toNumberName(Math.round(factory.money), "default", true, 1).replace(" ", "")}/\$${toNumberName(Math.round(factory.levelUpgradePrice), "default", true, 1).replace(" ", "")}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${toNumberName(Math.round(factory.money), "default", true, 1).replace(" ", "")}/\$${toNumberName(Math.round(factory.multiUpgradePrice), "default", true, 1).replace(" ", "")}`
         if (Math.round(factory.money) < 1e+21) {
-            money_txt.textContent = `\$${Math.round(factory.money).toLocaleString()}`
+            money_txt.textContent = `\$${toNumberName(Math.round(factory.money))}`
             prog.innerHTML = progtext
         } else {
             //var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
