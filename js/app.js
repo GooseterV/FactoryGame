@@ -86,7 +86,7 @@ particlesJS('particles-js',
     "detect_on": "canvas",
     "events": {
       "onhover": {
-        "enable": false,
+        "enable": true,
         "mode": "bubble"
       },
       "onclick": {
@@ -103,11 +103,11 @@ particlesJS('particles-js',
         }
       },
       "bubble": {
-        "distance": 400,
-        "size": 4,
-        "duration": 0.3,
+        "distance": 250,
+        "size": 5,
+        "duration": 0.32,
         "opacity": 1,
-        "speed": 3
+        "speed": 1.5
       },
       "repulse": {
         "distance": 200,
