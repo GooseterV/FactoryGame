@@ -54,7 +54,7 @@ class Factory {
     }
 }
 
-var name_factory_input = prompt("What is the name of your factory?").slice(0, 18)
+var name_factory_input = prompt("What is the name of your factory?").slice(0, 25)
 //name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
 let factory = new Factory(`${name_factory_input}`);
 //let factory = new Factory("Goose's Factory");
