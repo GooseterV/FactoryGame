@@ -445,6 +445,7 @@ select:hover {
     height: 10rem;
     align-items: center;
     margin: 7px;
+    border: 7.5px solid rgb(10, 10, 10);
 }
 
 .achievements-box {
@@ -479,4 +480,20 @@ select:hover {
     position: relative;
     top: 1.25em;
     padding-top: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(97, 94, 94);
+}
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    background: #555;
 }
