@@ -420,3 +420,10 @@ select:hover {
     position: absolute;
     transform: translate(-50%, -50%);
 }
+
+@media (min-width: 1920px) {
+    .notifier {
+        top: 65%;
+        left: 12.5%; 
+    }
+}
