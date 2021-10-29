@@ -317,7 +317,7 @@ function getRndInteger(min, max) {
 }
 
 function claimRewards(reward) {
-    let notifier = document.getElementsByClassName("notifier")[0];
+    var notifier = document.getElementsByClassName("notifier")[0];
     if (reward == "gain15%") {
         factory.money += percentage(15, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
@@ -326,6 +326,7 @@ function claimRewards(reward) {
         factory.money += percentage(50, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
     }
+    notifier.onclick = () => {}
 }
 
 function changeTab(selectedTab) {
