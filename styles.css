@@ -427,3 +427,56 @@ select:hover {
         left: 12.5%; 
     }
 }
+
+.achievement-locked {
+    background-color: rgb(196, 27, 21);
+    border-radius: 10px;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    border: 7.5px solid rgb(10, 10, 10);
+    margin: 7px;
+}
+.secret-achievement {
+    border-radius: 10px;
+    background-color: rgba(85,85,85,.7);
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    align-items: center;
+    margin: 7px;
+}
+
+.achievements-box {
+    z-index: 200;
+    top: 50%;
+    left: 35.5%;
+    position: absolute;
+}
+
+.achievement-unlocked {
+    background-color: rgb(14, 216, 14);
+    border-radius: 10px;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    border: 7.5px solid rgb(10, 10, 10);
+    margin: 7px;
+    text-align: center;
+}
+
+.achievement-header {
+    font-size: 21px;
+    font-weight: 900;
+    padding-top: 5px;
+    position: relative;
+    top: .5em;
+}
+
+.achievement-text {
+    font-size: 17px;
+    font-weight: 900;
+    position: relative;
+    top: 1.25em;
+    padding-top: 5px;
+}
