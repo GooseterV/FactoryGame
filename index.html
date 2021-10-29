@@ -1,7 +1,6 @@
 <html>
 
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="./js/toNumberName.js"></script>
     <script src="./js/bundle.js"></script>
     <script src="./js/ExpantaNum.js"></script>
@@ -20,23 +19,52 @@
 </head>
 
 <body>
-    <div id="particles-js"></div>
+    <div class="theme-background"></div>
+    <div class="tabs">
+        <button class="tablinks" onclick="changeTab('factory')">Factory</button>
+        <button class="tablinks" onclick="changeTab('achievements')">Achievements</button>
+        <button class="tablinks" onclick="changeTab('credits')">Credits</button>
+      </div>
     <div class="alert" id="warning-message" style="display: none;">
         <span class="closebtn" onclick="removeWarning(this)">&times;</span> Warning: You don't have enough money for
         this!
     </div>
-    <div class="festive-box">
-        <div class="money-count-text" data-type="txt">$0</div>
-        <div class="stat-tracker" id="stat-tracker" data-type="txt">Level: 1 Multiplier: 1</div>
-        <div class="factory-name" id="factory-name" data-type="txt">Unowned Factory</div>
-        <div class="progress-tracker" id="upgrade-progress" data-type="txt">Next Level: 1<br>Money: $1/$1<br><br>Next
-            Multiplier: 1<br>Cost: $1/$1</div>
-        <div class="interval-counter" id="cash-interval" data-type="txt">Cash Per Interval: $1/100ms</div>
+    <div class="default-box" id="theme-box">
+        <div id="factory-tab">
+            <div class="money-count-text" data-type="txt">$0</div>
+            <div class="stat-tracker" id="stat-tracker" data-type="txt">Level: 1 Multiplier: 1</div>
+            <div class="factory-name" id="factory-name" data-type="txt">Unowned Factory</div>
+            <div class="progress-tracker" id="upgrade-progress" data-type="txt">Next Level: 1<br>Money: $1/$1<br><br>Next
+                Multiplier: 1<br>Cost: $1/$1</div>
+            <div class="interval-counter" id="cash-interval" data-type="txt">Cash Per Interval: $1/100ms</div>
+            <button class="notifier" onclick="claimRewards(this.id)"><span>No new alerts</span></button>
+        </div>
+        <div id="achievements-tab" style="display: none;">
+            <div class="achievements-box">
+                <div class="achievement-unlocked">
+
+                </div>
+                <div class="achievement-locked">
+
+                </div>
+            </div>
+        </div>
+        <div id="credits-tab" style="display:none;">
+            <div class="game-name" data-type="txt">Goose's Factory Game</div>
+        </div>
     </div>
 
     <button onClick="createFactory()" id="factory-create-button" class="purchaseable">Create Factory</button>
     <button onClick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
     <button onClick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
+    <button onClick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
+    <button onClick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
+    <button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
+    <select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)" style="position:relative;">
+        <option value="default">Default</option>
+        <option value="festive">Festive</option>
+        <option value="spooky">Spooky</option>
+    </select>
     <script src="./js/particles.js"></script>
     <script src="./js/app.js"></script>
 </body>

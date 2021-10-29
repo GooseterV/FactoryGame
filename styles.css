@@ -288,6 +288,10 @@ html {
     animation: color-change 2s infinite;
     font-weight: 900;
 }
+.spooky-box div {
+    animation: spooky-color-change 4s infinite;
+    font-weight: 900;
+}
 
 @keyframes color-change {
     0% {
@@ -301,4 +305,118 @@ html {
     100% {
         color: red;
     }
+}
+
+input {
+    position: relative;
+}
+
+@keyframes spooky-color-change {
+    0% {
+        color: orange;
+    }
+
+    50% {
+        color: mediumslateblue;
+    }
+
+    100% {
+        color: orange;
+    }
+}
+
+#spooky-bg {
+    background-color: linear-gradient(top, black, brown, black)
+}
+
+select {
+    background-color: #4062f7;
+    color: #000000;
+    border: none;
+    border-radius: 7px;
+    padding: 6px 8px;
+    font-family: 'Roboto Mono';
+    font-weight: 700;
+    outline: none;
+    border: none;
+}
+
+select option {
+    color: #000000;
+    font-family: 'Roboto Mono';
+    font-weight: 900;
+}
+
+select:hover {
+    cursor:pointer !important;
+}
+
+.notifier {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Roboto Mono';
+    font-weight: 900;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    left: 15%;
+    top: 50%;
+    border-radius: 15px;
+    font-size: 25px;
+    background-color: #4062f7;
+    width: 10rem;
+    height: 10rem;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+}
+.notifier span {
+    position:relative;
+}
+
+
+.tabs {
+    overflow: hidden;
+    background-color: #4062f7;
+    margin-bottom: 10px;
+    height:3.75rem;
+    font-size: 20px;
+    font-weight: 900;
+}
+  
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.4s;
+    border-radius: 0px;
+    font-size: 25px;
+    font-weight: 900;
+}
+  
+.tabs button:hover {
+    background-color: #2f93f7;
+}
+  
+
+.tabs button.active {
+    background-color: #2f93f7;
+}
+  
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.game-name {
+    font-size: 60px;
+    color: #ffffff;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
