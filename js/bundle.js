@@ -60,14 +60,14 @@ class Factory {
             this.levelUpgradePrice **= 1.21
 
         } else if (this.money >= 1e12 && this.money < 1e20) {
-            this.gainAmount **= 1.475
-            this.levelUpgradePrice **= 1.225
+            this.gainAmount **= 1.3825
+            this.levelUpgradePrice **= 1.275
         } else if (this.money >= 1e20) {
-            this.gainAmount **= 1.370
+            this.gainAmount **= 1.3575
             this.levelUpgradePrice **= 1.35
         } else {
-            this.gainAmount **= 1.35
-            this.levelUpgradePrice **= 1.3625
+            this.gainAmount **= 1.4
+            this.levelUpgradePrice **= 1.275
         }
     }
     UpgradeSpeed() {
@@ -360,4 +360,11 @@ function changeTab(selectedTab) {
         creditsTab.style.display = "block"
         factoryButtons.style.display = "none"
     }
+}
+
+async function timeUntilUpgrade(upgrade) {
+    let amountPerSecond = (factory.gainAmount * 1000) / factory.gainInterval
+    let amountRemaining = factory.stats["prices"][upgrade] - factory.money
+    let timeRemaining = amountRemaining / amountPerSecond
+    return `${Math.round(timeRemaining)} Seconds`
 }
