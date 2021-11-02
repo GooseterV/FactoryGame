@@ -506,6 +506,15 @@ select:hover {
     padding-top: 5px;
 }
 
+.achievements-name-header {
+    font-size: 60px;
+    color: #ffffff;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
 ::-webkit-scrollbar {
     width: 12px;
     border-radius: 10px;

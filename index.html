@@ -41,9 +41,12 @@
             <button class="notifier" onclick="claimRewards(this.id)"><span>No new alerts</span></button>
         </div>
         <div id="achievements-tab" style="display: none;">
+            <div class="achievements-name-header">
+                Factory Achievements
+            </div>
             <div class="achievements-box">
                 <div class="achievements-row">
-                    <div class="achievement-unlocked" id="starter-achievement">
+                    <div class="achievement-locked" id="hello-world-achievement">
                         <span class="achievement-header">
                             Hello World
                         </span>
@@ -54,7 +57,7 @@
                             Reward: $25
                         </span>
                     </div>
-                    <div class="achievement-locked">
+                    <div class="achievement-locked" id="infinity-achievement">
                         <span class="achievement-header">
                             Infinity and Beyond
                         </span>
@@ -65,23 +68,6 @@
                             Reward: Infinity Theme
                         </span>
                     </div>
-                    <div class="secret-achievement">
-                        <i class="fas fa-lock fa-5x" style="position: relative; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)"></i>
-                    </div>
-                </div>
-                <div class="achievements-row">
-                    <div class="achievement-unlocked" id="starter-achievement2">
-                        <span class="achievement-header">
-                            Hello World
-                        </span>
-                        </br>
-                        <span class="achievement-text">
-                            Make your first dollar
-                            </br></br>
-                            Reward: $25
-                        </span>
-                    </div>
-                    <div class="achievement-locked"></div>
                     <div class="secret-achievement">
                         <i class="fas fa-lock fa-5x" style="position: relative; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)"></i>
                     </div>
@@ -116,18 +102,19 @@
             </div>
         </div>
     </div>
-
-    <button onClick="createFactory()" id="factory-create-button" class="purchaseable">Create Factory</button>
-    <button onClick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
-    <button onClick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
-    <button onClick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
-    <button onClick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
-    <button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
-    <select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)" style="position:relative;">
-        <option value="default">Default</option>
-        <option value="festive">Festive</option>
-        <option value="spooky">Spooky</option>
-    </select>
+    <div id="factory-buttons">
+        <button onClick="createFactory()" id="factory-create-button" class="purchaseable">Create Factory</button>
+        <button onClick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
+        <button onClick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
+        <button onClick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
+        <button onClick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
+        <button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
+        <select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)" style="position:relative;">
+            <option value="default">Default</option>
+            <option value="festive">Festive</option>
+            <option value="spooky">Spooky</option>
+        </select>
+    </div>
     <!-- <script src="./js/particles.js"></script> -->
     <!-- <script src="./js/app.js"></script> -->
 </body>

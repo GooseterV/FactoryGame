@@ -341,19 +341,23 @@ function changeTab(selectedTab) {
     let factoryTab = document.getElementById("factory-tab")
     let achievementTab = document.getElementById("achievements-tab")
     let creditsTab = document.getElementById("credits-tab")
+    let factoryButtons = document.getElementById("factory-buttons")
     if (selectedTab == "factory") {
         factoryTab.style.display = "block"
         creditsTab.style.display = "none"
         achievementTab.style.display = "none"
+        factoryButtons.style.display = "block"
     }
     else if (selectedTab == "achievements") {
         factoryTab.style.display = "none"
         creditsTab.style.display = "none"
         achievementTab.style.display = "block"
+        factoryButtons.style.display = "none"
     }
     else if (selectedTab == "credits") {
         factoryTab.style.display = "none"
         achievementTab.style.display = "none"
         creditsTab.style.display = "block"
+        factoryButtons.style.display = "none"
     }
 }
