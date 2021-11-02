@@ -436,6 +436,10 @@ select:hover {
     height: 10rem;
     border: 7.5px solid rgb(10, 10, 10);
     margin: 7px;
+    top:-50%;
+    left:-50%;
+    display:inline-block;
+    flex-direction: row;
 }
 .secret-achievement {
     border-radius: 10px;
@@ -445,13 +449,19 @@ select:hover {
     height: 10rem;
     align-items: center;
     margin: 7px;
+    top:-50%;
+    left:-50%;
     border: 7.5px solid rgb(10, 10, 10);
+    display:inline-block;
+    flex-direction: row;
 }
 
 .achievements-box {
+    display: flex;
+    flex-direction: row;
     z-index: 200;
-    top: 50%;
-    left: 35.5%;
+    top: 35%;
+    left: 25%;
     position: absolute;
     justify-items: center;
 }
@@ -467,6 +477,8 @@ select:hover {
     border: 7.5px solid rgb(10, 10, 10);
     margin: 7px;
     text-align: center;
+    display:inline-block;
+    flex-direction: row;
 }
 
 .achievement-header {
