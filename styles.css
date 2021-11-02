@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+.money-count-text {
+    font-size: 50px;
+    color: #ffffff;
+    top: 37.5%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.stat-tracker {
+    color: #ffffff;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    word-wrap: unset;
+}
+
+.factory-name {
+    font-size: 60px;
+    color: #ffffff;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.progress-tracker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 15%;
+    top: 35%;
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: #ffffff;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: #000000;
+}
+
+html {
+    /*background-color: #000000;*/
+    font-family: 'Roboto Mono', sans-serif;
+}
+
+@media (min-width: 480px) {
+    html {
+        zoom: 60%;
+    }
+
+    .stat-tracker {
+        font-size: 30px;
+        word-wrap: unset;
+    }
+
+    .factory-name {
+        font-size: 35px;
+    }
+
+    .progress-tracker {
+        left: 50%;
+        top: 65%;
+    }
+}
+
+@media (min-width: 1090px) {
+    html {
+        zoom: 100%;
+    }
+
+    .progress-tracker {
+        left: 15%;
+        top: 35%;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        zoom: 60%;
+    }
+
+    .stat-tracker {
+        font-size: 25px;
+        word-wrap: unset;
+    }
+
+    .factory-name {
+        font-size: 30px;
+    }
+
+    .progress-tracker {
+        left: 50%;
+        top: 65%;
+    }
+    .interval-counter {
+        left: 50%;
+        top: 72.5%;
+    }
+}
+
+@media (max-width: 1920px) {
+    html {
+        zoom: 100%;
+    }
+
+    .progress-tracker {
+        left: 50%;
+        top: 65%;
+    }
+}
+
+@media (min-width: 280px) {
+    html {
+        zoom: 75%;
+    }
+
+    .progress-tracker {
+        left: 50%;
+        top: 69%;
+    }
+    .interval-counter {
+        left: 50%;
+        top: 75%;
+    }
+}
+
+@media (min-height: 550px) {
+    html {
+        zoom: 75%;
+    }
+
+    .progress-tracker {
+        left: 50%;
+        top: 80%;
+    }
+}
+
+@media (min-width: 1920px) {
+    html {
+        zoom: 100%;
+    }
+
+    .progress-tracker {
+        left: 15%;
+        top: 35%;
+    }
+}
+
+button {
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border: 0.67rem solid transparent;
+    border-radius: 35px;
+    text-decoration: none;
+    position: relative;
+}
+
+.purchaseable {
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border: 0.67rem solid transparent;
+    border-radius: 35px;
+    text-decoration: none;
+    background-color: lime;
+    display: inline-flex;
+}
+
+.expensive {
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border: 0.67rem solid transparent;
+    border-radius: 35px;
+    text-decoration: none;
+    background-color: red;
+    display: inline-flex;
+}
+
+.expensive:hover {
+    background-color: #cf0202;
+}
+
+.purchaseable:hover {
+    background-color: #03e20f;
+}
+
+button:hover {
+    cursor: pointer !important;
+}
+
+.interval-counter {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 62.5%;
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent
+}
+
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #111;
+}
+
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    background-color: #4bd3e6;
+    background-image: url('');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+
+.festive-box div {
+    animation: color-change 2s infinite;
+    font-weight: 900;
+}
+.spooky-box div {
+    animation: spooky-color-change 4s infinite;
+    font-weight: 900;
+}
+
+@keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: green;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+input {
+    position: relative;
+}
+
+@keyframes spooky-color-change {
+    0% {
+        color: orange;
+    }
+
+    50% {
+        color: mediumslateblue;
+    }
+
+    100% {
+        color: orange;
+    }
+}
+
+#spooky-bg {
+    background-color: linear-gradient(top, black, brown, black)
+}
+
+select {
+    background-color: #4062f7;
+    color: #000000;
+    border: none;
+    border-radius: 7px;
+    padding: 6px 8px;
+    font-family: 'Roboto Mono';
+    font-weight: 700;
+    outline: none;
+    border: none;
+}
+
+select option {
+    color: #000000;
+    font-family: 'Roboto Mono';
+    font-weight: 900;
+}
+
+select:hover {
+    cursor:pointer !important;
+}
+
+.notifier {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Roboto Mono';
+    font-weight: 900;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    left: 15%;
+    top: 50%;
+    border-radius: 15px;
+    font-size: 25px;
+    background-color: #4062f7;
+    width: 10rem;
+    height: 10rem;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+}
+.notifier span {
+    position:relative;
+}
+
+
+.tabs {
+    overflow: hidden;
+    background-color: #4062f7;
+    margin-bottom: 10px;
+    height:3.75rem;
+    font-size: 20px;
+    font-weight: 900;
+}
+  
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.4s;
+    border-radius: 0px;
+    font-size: 25px;
+    font-weight: 900;
+}
+  
+.tabs button:hover {
+    background-color: #2f93f7;
+}
+  
+
+.tabs button.active {
+    background-color: #2f93f7;
+}
+  
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.game-name {
+    font-size: 60px;
+    color: #ffffff;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+@media (min-width: 1920px) {
+    .notifier {
+        top: 65%;
+        left: 12.5%; 
+    }
+}
+
+.achievement-locked {
+    background-color: rgb(196, 27, 21);
+    border-radius: 10px;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    border: 7.5px solid rgb(10, 10, 10);
+    margin: 7px;
+}
+.secret-achievement {
+    border-radius: 10px;
+    background-color: rgba(85,85,85,.7);
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    align-items: center;
+    margin: 7px;
+    border: 7.5px solid rgb(10, 10, 10);
+}
+
+.achievements-box {
+    z-index: 200;
+    top: 50%;
+    left: 35.5%;
+    position: absolute;
+    justify-items: center;
+}
+
+.achievement-unlocked {
+    background-color: rgb(14, 216, 14);
+    border-radius: 10px;
+    position: relative;
+    top:-50%;
+    left:-50%;
+    width: 10rem;
+    height: 10rem;
+    border: 7.5px solid rgb(10, 10, 10);
+    margin: 7px;
+    text-align: center;
+}
+
+.achievement-header {
+    font-size: 21px;
+    font-weight: 900;
+    padding-top: 5px;
+    position: relative;
+    top: .5em;
+}
+
+.achievement-text {
+    font-size: 17px;
+    font-weight: 900;
+    position: relative;
+    top: 1.25em;
+    padding-top: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(97, 94, 94);
+}
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    background: #555;
+}
+
+.credits {
+    font-size: 45px;
+    color: #ffffff;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+button a {
+    color: #000;
+}
+button a:hover {
+    color:rgb(75, 68, 68);
+}
+
+a:hover {
+    color:turquoise;
+}
+
