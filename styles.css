@@ -419,7 +419,6 @@ select:hover {
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
-    text-align: center;
 }
 
 @media (min-width: 1920px) {
@@ -501,29 +500,3 @@ select:hover {
     border-radius: 10px;
     background: #555;
 }
-
-.credits {
-    font-size: 45px;
-    color: #ffffff;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-button a {
-    color: #000;
-}
-button a:hover {
-    color:rgb(75, 68, 68);
-}
-
-a:hover {
-    color:turquoise;
-}
-
