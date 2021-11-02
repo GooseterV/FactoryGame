@@ -24,6 +24,9 @@ class Factory {
                 "speed": this.speedUpgradePrice
             }
         }
+        this.achievements = [
+
+        ]
     }
 
 
@@ -57,14 +60,14 @@ class Factory {
             this.levelUpgradePrice **= 1.21
 
         } else if (this.money >= 1e12 && this.money < 1e20) {
-            this.gainAmount **= 1.3825
-            this.levelUpgradePrice **= 1.275
+            this.gainAmount **= 1.475
+            this.levelUpgradePrice **= 1.225
         } else if (this.money >= 1e20) {
             this.gainAmount **= 1.370
             this.levelUpgradePrice **= 1.35
         } else {
-            this.gainAmount **= 1.36775
-            this.levelUpgradePrice **= 1.3735
+            this.gainAmount **= 1.35
+            this.levelUpgradePrice **= 1.3625
         }
     }
     UpgradeSpeed() {
@@ -321,12 +324,16 @@ function claimRewards(reward) {
     if (reward == "gain15%") {
         factory.money += percentage(15, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
+        notifier.id = ""
     }
     else if (reward == "gain50%") {
         factory.money += percentage(50, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
+        notifier.id = ""
     }
-    notifier.onclick = () => {}
+    else if (reward == "") {
+        // pass
+    }
 }
 
 function changeTab(selectedTab) {
