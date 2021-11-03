@@ -541,9 +541,7 @@ select:hover {
     border-radius: 10px;
     background: #555;
 }
-.button:hover {
-    cursor: url('src/goose_arched.png')
-}
+
 .credits {
     font-size: 45px;
     color: #ffffff;
@@ -595,4 +593,8 @@ a:hover {
   
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.button:hover {
+    cursor: url('https://gooseterv.github.io/FactoryGame/src/goose_arched.png') !important;
 }
