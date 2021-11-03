@@ -372,5 +372,5 @@ function timeUntilUpgrade(upgrade) {
 async function alertTime() {
     const friendlyNotice = document.getElementById("notification-friendly")
     friendlyNotice.style.display = "block"
-    friendlyNotice.innerHTML += `${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
+    friendlyNotice.innerHTML = `<span class="closebtn" onclick="removeWarning(this)">&times;</span> ${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
 }
