@@ -11,6 +11,10 @@ class Factory {
         this.gainInterval = 100;
         this.speedUpgradePrice = 1e3
         this.isActive = false;
+        this.totalCash = 0;
+        this.achievements = [
+
+        ]
         this.stats = {
             "name": this.name,
             "money": this.money,
@@ -18,6 +22,8 @@ class Factory {
             "level": this.level,
             "gainAmount": this.gainAmount,
             "gainInterval": this.gainInterval,
+            "totalCash":this.totalCash,
+            "achievements":this.achievements,
             "prices": {
                 "level": this.levelUpgradePrice,
                 "multiplier": this.multiUpgradePrice,
@@ -29,6 +35,7 @@ class Factory {
 
     GainMoney(cash) {
         this.money += cash * this.multiplier
+        this.totalCash += cash * this.multiplier
     }
 
     LooseMoney(cash) {
@@ -60,11 +67,11 @@ class Factory {
             this.gainAmount **= 1.3825
             this.levelUpgradePrice **= 1.275
         } else if (this.money >= 1e20) {
-            this.gainAmount **= 1.370
-            this.levelUpgradePrice **= 1.35
+            this.gainAmount **= 1.3575
+            this.levelUpgradePrice **= 1.275
         } else {
-            this.gainAmount **= 1.36775
-            this.levelUpgradePrice **= 1.3735
+            this.gainAmount **= 1.4
+            this.levelUpgradePrice **= 1.275
         }
     }
     UpgradeSpeed() {
@@ -86,7 +93,10 @@ async function createFactory() {
 
     title.textContent = `${factory.name} | GFG`
     factory.isActive = true;
-    while (factory.money >= 0) {
+    if (!("hello-world-achievement" in factory.achievements))  {
+        factory.achievements.push("hello-world-achievement")
+    }
+    while (factory.isActive) {
         factory.GainMoney(factory.stats.gainAmount)
         factory.stats = {
             "name": factory.name,
@@ -95,6 +105,8 @@ async function createFactory() {
             "level": factory.level,
             "gainAmount": factory.gainAmount,
             "gainInterval": factory.gainInterval,
+            "totalCash":factory.totalCash,
+            "achievements":factory.achievements,
             "prices": {
                 "level": factory.levelUpgradePrice,
                 "multiplier": factory.multiUpgradePrice,
@@ -152,9 +164,13 @@ async function createFactory() {
             notifier.id = "gain50%"
             notifier.children[0].innerHTML = "Gain 50% of current money?"
         }
+        if (!("monopoly-man-achievement" in factory.achievements)) {
+            if (factory.money >= 1e9) {
+                factory.achievements.push("monopoly-man-achievement")
+            } 
+        }
         await new Promise(resolve => setTimeout(resolve, factory.gainInterval));
 
-        //process.stdout.write(`\r\$${factory.money}`)
     }
 }
 
@@ -320,13 +336,19 @@ function claimRewards(reward) {
     var notifier = document.getElementsByClassName("notifier")[0];
     if (reward == "gain15%") {
         factory.money += percentage(15, factory.money)
+        factory.totalCash += percentage(15, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
+        notifier.id = ""
     }
     else if (reward == "gain50%") {
         factory.money += percentage(50, factory.money)
+        factory.totalCash += percentage(50, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
+        notifier.id = ""
     }
-    notifier.onclick = () => {}
+    else if (reward == "") {
+        // pass
+    }
 }
 
 function changeTab(selectedTab) {
@@ -334,19 +356,59 @@ function changeTab(selectedTab) {
     let factoryTab = document.getElementById("factory-tab")
     let achievementTab = document.getElementById("achievements-tab")
     let creditsTab = document.getElementById("credits-tab")
+    let factoryButtons = document.getElementById("factory-buttons")
+    let achievementsButton = document.getElementById("achievements-button")
+    let sAchievementsButton = document.getElementById("save-achievements-button")
     if (selectedTab == "factory") {
         factoryTab.style.display = "block"
         creditsTab.style.display = "none"
         achievementTab.style.display = "none"
+        factoryButtons.style.display = "block"
+        achievementsButton.style.display = "none"
+        sAchievementsButton.style.display = "none"
     }
     else if (selectedTab == "achievements") {
         factoryTab.style.display = "none"
         creditsTab.style.display = "none"
         achievementTab.style.display = "block"
+        factoryButtons.style.display = "none"
+        achievementsButton.style.display = "inline"
+        sAchievementsButton.style.display = "inline"
+
     }
     else if (selectedTab == "credits") {
         factoryTab.style.display = "none"
         achievementTab.style.display = "none"
         creditsTab.style.display = "block"
+        factoryButtons.style.display = "none"
+        achievementsButton.style.display = "none"
+        sAchievementsButton.style.display = "none"
     }
+}
+
+function timeUntilUpgrade(upgrade) {
+    let amountPerSecond = (factory.gainAmount * 1000) / factory.gainInterval
+    let amountRemaining = factory.stats["prices"][upgrade] - factory.money
+    let timeRemaining = amountRemaining / amountPerSecond
+    return `${Math.round(timeRemaining)} Seconds`
+}
+
+async function alertTime() {
+    const friendlyNotice = document.getElementById("notification-friendly")
+    friendlyNotice.style.display = "block"
+    friendlyNotice.innerHTML = `<span class="closebtn" onclick="removeWarning(this)">&times;</span> ${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
+}
+
+async function loadAchievements() {
+    factory.achievements = JSON.parse(localStorage.achievements)
+    for (let achievementNum in factory.achievements) {
+        const achievementId = factory.achievements[achievementNum]
+        const achievement = document.getElementById(achievementId)
+        achievement.className = "achievement-unlocked"
+
+    }
+}
+
+async function saveAchievements() {
+    localStorage.achievements = JSON.stringify(factory.achievements)
 }

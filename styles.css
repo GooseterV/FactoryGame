@@ -48,6 +48,16 @@
     position: relative;
 }
 
+.alert-friendly {
+    padding: 20px;
+    background-color: #2dcf5e;
+    color: #ffffff;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    position: relative;
+}
+
 .closebtn {
     margin-left: 15px;
     color: #ffffff;
@@ -231,6 +241,7 @@ button {
 
 button:hover {
     cursor: pointer !important;
+    background-color: #ddd;
 }
 
 .interval-counter {
@@ -436,6 +447,11 @@ select:hover {
     height: 10rem;
     border: 7.5px solid rgb(10, 10, 10);
     margin: 7px;
+    text-align: center;
+    display:inline-block;
+    flex-direction: row;
+    top:-50%;
+    left:-50%;
 }
 .secret-achievement {
     border-radius: 10px;
@@ -445,14 +461,28 @@ select:hover {
     height: 10rem;
     align-items: center;
     margin: 7px;
+    top:-50%;
+    left:-50%;
     border: 7.5px solid rgb(10, 10, 10);
+    display:inline-block;
+    flex-direction: row;
 }
 
-.achievements-box {
+.achievements-box{
+    display: flex;
+    flex-direction: column;
     z-index: 200;
-    top: 50%;
-    left: 35.5%;
+    top: 35%;
+    left: 35%;
     position: absolute;
+    justify-items: center;
+    float:right;
+}
+.achievements-row{
+    display: flex;
+    flex-direction: row;
+    z-index: 200;
+    position: relative;
     justify-items: center;
 }
 
@@ -460,17 +490,19 @@ select:hover {
     background-color: rgb(14, 216, 14);
     border-radius: 10px;
     position: relative;
-    top:-50%;
-    left:-50%;
     width: 10rem;
     height: 10rem;
     border: 7.5px solid rgb(10, 10, 10);
     margin: 7px;
     text-align: center;
+    display:inline-block;
+    flex-direction: row;
+    top:-50%;
+    left:-50%;
 }
 
 .achievement-header {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 900;
     padding-top: 5px;
     position: relative;
@@ -478,11 +510,20 @@ select:hover {
 }
 
 .achievement-text {
-    font-size: 17px;
-    font-weight: 900;
+    font-size: 15px;
+    font-weight: bold;
     position: relative;
     top: 1.25em;
     padding-top: 5px;
+}
+
+.achievements-name-header {
+    font-size: 60px;
+    color: #ffffff;
+    top: 25%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
 
 ::-webkit-scrollbar {
@@ -502,4 +543,56 @@ select:hover {
 }
 .button:hover {
     cursor: url('src/goose_arched.png')
+}
+.credits {
+    font-size: 45px;
+    color: #ffffff;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+button a {
+    color: #000;
+}
+button a:hover {
+    color:rgb(75, 68, 68);
+}
+
+a:hover {
+    color:turquoise;
+}
+
+.expensive:hover {
+    cursor: no-drop !important;
+    caret-color: #000 !important;
+}
+
+.notifier:hover {
+    background-color: #3655e2 !important;
+}
+
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
