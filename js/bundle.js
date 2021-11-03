@@ -362,9 +362,15 @@ function changeTab(selectedTab) {
     }
 }
 
-async function timeUntilUpgrade(upgrade) {
+function timeUntilUpgrade(upgrade) {
     let amountPerSecond = (factory.gainAmount * 1000) / factory.gainInterval
     let amountRemaining = factory.stats["prices"][upgrade] - factory.money
     let timeRemaining = amountRemaining / amountPerSecond
     return `${Math.round(timeRemaining)} Seconds`
+}
+
+async function alertTime() {
+    const friendlyNotice = document.getElementById("notification-friendly")
+    friendlyNotice.style.display = "block"
+    friendlyNotice.innerHTML += `${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
 }

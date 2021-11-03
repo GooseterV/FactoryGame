@@ -30,6 +30,9 @@
         <span class="closebtn" onclick="removeWarning(this)">&times;</span> Warning: You don't have enough money for
         this!
     </div>
+    <div class="alert-friendly" id="notification-friendly" style="display: none;">
+        <span class="closebtn" onclick="removeWarning(this)">&times;</span>
+    </div>
     <div class="default-box" id="theme-box">
         <div id="factory-tab">
             <div class="money-count-text" data-type="txt">$0</div>
@@ -107,6 +110,7 @@
         <button onClick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
         <button onClick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
         <button onClick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
+        <button onClick="alertTime()">Time Until Upgrades</button>
         <button onClick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
         <button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
         <select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)" style="position:relative;">

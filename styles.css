@@ -48,6 +48,16 @@
     position: relative;
 }
 
+.alert-friendly {
+    padding: 20px;
+    background-color: #2dcf5e;
+    color: #ffffff;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    position: relative;
+}
+
 .closebtn {
     margin-left: 15px;
     color: #ffffff;
