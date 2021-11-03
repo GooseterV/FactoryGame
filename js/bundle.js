@@ -164,9 +164,13 @@ async function createFactory() {
             notifier.id = "gain50%"
             notifier.children[0].innerHTML = "Gain 50% of current money?"
         }
+        if (!("monopoly-man-achievement" in factory.achievements)) {
+            if (factory.money >= 1e9) {
+                factory.achievements.push("monopoly-man-achievement")
+            } 
+        }
         await new Promise(resolve => setTimeout(resolve, factory.gainInterval));
 
-        //process.stdout.write(`\r\$${factory.money}`)
     }
 }
 
@@ -354,19 +358,23 @@ function changeTab(selectedTab) {
     let creditsTab = document.getElementById("credits-tab")
     let factoryButtons = document.getElementById("factory-buttons")
     let achievementsButton = document.getElementById("achievements-button")
+    let sAchievementsButton = document.getElementById("save-achievements-button")
     if (selectedTab == "factory") {
         factoryTab.style.display = "block"
         creditsTab.style.display = "none"
         achievementTab.style.display = "none"
         factoryButtons.style.display = "block"
         achievementsButton.style.display = "none"
+        sAchievementsButton.style.display = "none"
     }
     else if (selectedTab == "achievements") {
         factoryTab.style.display = "none"
         creditsTab.style.display = "none"
         achievementTab.style.display = "block"
         factoryButtons.style.display = "none"
-        achievementsButton.style.display = "block"
+        achievementsButton.style.display = "inline"
+        sAchievementsButton.style.display = "inline"
+
     }
     else if (selectedTab == "credits") {
         factoryTab.style.display = "none"
@@ -374,6 +382,7 @@ function changeTab(selectedTab) {
         creditsTab.style.display = "block"
         factoryButtons.style.display = "none"
         achievementsButton.style.display = "none"
+        sAchievementsButton.style.display = "none"
     }
 }
 
@@ -391,10 +400,15 @@ async function alertTime() {
 }
 
 async function loadAchievements() {
+    factory.achievements = JSON.parse(localStorage.achievements)
     for (let achievementNum in factory.achievements) {
         const achievementId = factory.achievements[achievementNum]
         const achievement = document.getElementById(achievementId)
         achievement.className = "achievement-unlocked"
 
     }
+}
+
+async function saveAchievements() {
+    localStorage.achievements = JSON.stringify(factory.achievements)
 }

@@ -59,7 +59,7 @@
                             Reward: $25
                         </span>
                     </div>
-                    <div class="achievement-locked" id="hello-world-achievement">
+                    <div class="achievement-locked" id="monopoly-man-achievement">
                         <span class="achievement-header">
                             Monopoly Man
                         </span>
@@ -68,7 +68,7 @@
                             Earn a total of one billion dollars
                             </br></br>
                             Reward: <div class="tooltip" style="font-size: 13px;">Monocle and Tophat
-                                <span class="tooltiptext" style="font-size: 17px;">Monocle and Tophat: 25% chance to gain $1M every 50 ticks.</span>
+                                <span class="tooltiptext" style="font-size: 17px;">Monocle and Tophat: +25% chance to gain $10k every 10 ticks.</span>
                               </div>
                         </span>
                     </div>
@@ -142,7 +142,16 @@
             <option value="spooky">Spooky</option>
         </select>
     </div>
-    <button onClick="loadAchievements()" id="achievements-button" style="display:none;">Load Achievements</button>
+    <button onClick="loadAchievements()" id="achievements-button" style="
+    display:none; 
+    top: 6.5%;
+    left: 45%;
+    transform: translate(-50%, -50%);">Load Achievements</button>
+    <button onClick="saveAchievements()" id="save-achievements-button" style="
+    display:none; 
+    top: 6.5%;
+    left: 45%;
+    transform: translate(-50%, -50%);">Save Achievements</button>
     <!-- <script src="./js/particles.js"></script> -->
     <!-- <script src="./js/app.js"></script> -->
 </body>
