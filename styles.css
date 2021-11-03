@@ -500,3 +500,6 @@ select:hover {
     border-radius: 10px;
     background: #555;
 }
+.button:hover {
+    cursor: url('src/goose_arched.png')
+}
