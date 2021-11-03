@@ -241,6 +241,7 @@ button {
 
 button:hover {
     cursor: pointer !important;
+    background-color: #ddd;
 }
 
 .interval-counter {
@@ -501,7 +502,7 @@ select:hover {
 }
 
 .achievement-header {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 900;
     padding-top: 5px;
     position: relative;
@@ -563,4 +564,32 @@ button a:hover {
 
 a:hover {
     color:turquoise;
+}
+
+.expensive:hover {
+    cursor: no-drop !important;
+    caret-color: #000 !important;
+}
+
+.notifier:hover {
+    background-color: #3655e2 !important;
+}
+
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+  
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

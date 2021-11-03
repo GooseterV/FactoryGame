@@ -11,6 +11,7 @@ class Factory {
         this.gainInterval = 100;
         this.speedUpgradePrice = 1e3
         this.isActive = false;
+        this.totalCash = 0;
         this.stats = {
             "name": this.name,
             "money": this.money,
@@ -18,6 +19,7 @@ class Factory {
             "level": this.level,
             "gainAmount": this.gainAmount,
             "gainInterval": this.gainInterval,
+            "totalCash":this.totalCash,
             "prices": {
                 "level": this.levelUpgradePrice,
                 "multiplier": this.multiUpgradePrice,
@@ -32,6 +34,7 @@ class Factory {
 
     GainMoney(cash) {
         this.money += cash * this.multiplier
+        this.totalCash += cash * this.multiplier
     }
 
     LooseMoney(cash) {
@@ -98,6 +101,7 @@ async function createFactory() {
             "level": factory.level,
             "gainAmount": factory.gainAmount,
             "gainInterval": factory.gainInterval,
+            "totalCash":factory.totalCash,
             "prices": {
                 "level": factory.levelUpgradePrice,
                 "multiplier": factory.multiUpgradePrice,
@@ -323,11 +327,13 @@ function claimRewards(reward) {
     var notifier = document.getElementsByClassName("notifier")[0];
     if (reward == "gain15%") {
         factory.money += percentage(15, factory.money)
+        factory.totalCash += percentage(15, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
         notifier.id = ""
     }
     else if (reward == "gain50%") {
         factory.money += percentage(50, factory.money)
+        factory.totalCash += percentage(50, factory.money)
         notifier.children[0].innerHTML = "No new alerts"
         notifier.id = ""
     }
