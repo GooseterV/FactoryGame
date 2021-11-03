@@ -12,6 +12,9 @@ class Factory {
         this.speedUpgradePrice = 1e3
         this.isActive = false;
         this.totalCash = 0;
+        this.achievements = [
+
+        ]
         this.stats = {
             "name": this.name,
             "money": this.money,
@@ -20,15 +23,13 @@ class Factory {
             "gainAmount": this.gainAmount,
             "gainInterval": this.gainInterval,
             "totalCash":this.totalCash,
+            "achievements":this.achievements,
             "prices": {
                 "level": this.levelUpgradePrice,
                 "multiplier": this.multiUpgradePrice,
                 "speed": this.speedUpgradePrice
             }
         }
-        this.achievements = [
-
-        ]
     }
 
 
@@ -67,7 +68,7 @@ class Factory {
             this.levelUpgradePrice **= 1.275
         } else if (this.money >= 1e20) {
             this.gainAmount **= 1.3575
-            this.levelUpgradePrice **= 1.35
+            this.levelUpgradePrice **= 1.275
         } else {
             this.gainAmount **= 1.4
             this.levelUpgradePrice **= 1.275
@@ -92,7 +93,10 @@ async function createFactory() {
 
     title.textContent = `${factory.name} | GFG`
     factory.isActive = true;
-    while (factory.money >= 0) {
+    if (!("hello-world-achievement" in factory.achievements))  {
+        factory.achievements.push("hello-world-achievement")
+    }
+    while (factory.isActive) {
         factory.GainMoney(factory.stats.gainAmount)
         factory.stats = {
             "name": factory.name,
@@ -102,6 +106,7 @@ async function createFactory() {
             "gainAmount": factory.gainAmount,
             "gainInterval": factory.gainInterval,
             "totalCash":factory.totalCash,
+            "achievements":factory.achievements,
             "prices": {
                 "level": factory.levelUpgradePrice,
                 "multiplier": factory.multiUpgradePrice,
@@ -348,23 +353,27 @@ function changeTab(selectedTab) {
     let achievementTab = document.getElementById("achievements-tab")
     let creditsTab = document.getElementById("credits-tab")
     let factoryButtons = document.getElementById("factory-buttons")
+    let achievementsButton = document.getElementById("achievements-button")
     if (selectedTab == "factory") {
         factoryTab.style.display = "block"
         creditsTab.style.display = "none"
         achievementTab.style.display = "none"
         factoryButtons.style.display = "block"
+        achievementsButton.style.display = "none"
     }
     else if (selectedTab == "achievements") {
         factoryTab.style.display = "none"
         creditsTab.style.display = "none"
         achievementTab.style.display = "block"
         factoryButtons.style.display = "none"
+        achievementsButton.style.display = "block"
     }
     else if (selectedTab == "credits") {
         factoryTab.style.display = "none"
         achievementTab.style.display = "none"
         creditsTab.style.display = "block"
         factoryButtons.style.display = "none"
+        achievementsButton.style.display = "none"
     }
 }
 
@@ -379,4 +388,13 @@ async function alertTime() {
     const friendlyNotice = document.getElementById("notification-friendly")
     friendlyNotice.style.display = "block"
     friendlyNotice.innerHTML = `<span class="closebtn" onclick="removeWarning(this)">&times;</span> ${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
+}
+
+async function loadAchievements() {
+    for (let achievementNum in factory.achievements) {
+        const achievementId = factory.achievements[achievementNum]
+        const achievement = document.getElementById(achievementId)
+        achievement.className = "achievement-unlocked"
+
+    }
 }
