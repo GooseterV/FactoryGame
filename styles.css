@@ -595,6 +595,13 @@ a:hover {
     visibility: visible;
 }
 
-.button:hover {
-    cursor: url('https://gooseterv.github.io/FactoryGame/src/goose_arched.png') !important;
+button:hover, select:hover  {
+    cursor: url(https://gooseterv.github.io/FactoryGame/src/goose_arched.png) 24 24, auto !important;
+}
+html {
+    cursor: url(https://gooseterv.github.io/FactoryGame/src/goose_honk.png) 24 24, auto !important;
+}
+
+.expensive:hover {
+    cursor: url(https://gooseterv.github.io/FactoryGame/src/goose_no_entry.png) 24 24, auto !important;
 }
