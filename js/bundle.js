@@ -165,8 +165,13 @@ async function createFactory() {
             notifier.children[0].innerHTML = "Gain 50% of current money?"
         }
         if (!("monopoly-man-achievement" in factory.achievements)) {
-            if (factory.money >= 1e9) {
+            if (factory.totalCash >= 1e9) {
                 factory.achievements.push("monopoly-man-achievement")
+            } 
+        }
+        if (!("infinity-achievement" in factory.achievements)) {
+            if (factory.money > 1e308) {
+                factory.achievements.push("infinity-achievement")
             } 
         }
         await new Promise(resolve => setTimeout(resolve, factory.gainInterval));
@@ -209,6 +214,11 @@ function upgradeFactory(btn) {
     }
     stats.textContent = `Level: ${factory.level} Multiplier: ${factory.multiplier}`
     cashinterval.textContent = `Cash Per Interval: \$${toNumberName(Math.round(factory.gainAmount * factory.multiplier), "default", true, 1).replace(" ", "")}/${Math.round(factory.gainInterval)}ms`
+    if (factory.level == 42) {
+        if (!("the-answer-achievement" in factory.achievements)) {
+            factory.achievements.push("the-answer-achievement")
+        }
+    }
 }
 
 async function removeWarning(warning) {
