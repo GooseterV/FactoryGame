@@ -359,6 +359,8 @@ function changeTab(selectedTab) {
     let factoryButtons = document.getElementById("factory-buttons")
     let achievementsButton = document.getElementById("achievements-button")
     let sAchievementsButton = document.getElementById("save-achievements-button")
+    let warning2 = document.getElementById("notification-friendly")
+    let warning = document.getElementById("warning-message")
     if (selectedTab == "factory") {
         factoryTab.style.display = "block"
         creditsTab.style.display = "none"
@@ -374,6 +376,8 @@ function changeTab(selectedTab) {
         factoryButtons.style.display = "none"
         achievementsButton.style.display = "inline"
         sAchievementsButton.style.display = "inline"
+        warning.style.display = "none"
+        warning2.style.display = "none"
 
     }
     else if (selectedTab == "credits") {
@@ -383,6 +387,8 @@ function changeTab(selectedTab) {
         factoryButtons.style.display = "none"
         achievementsButton.style.display = "none"
         sAchievementsButton.style.display = "none"
+        warning.style.display = "none"
+        warning2.style.display = "none"
     }
 }
 
