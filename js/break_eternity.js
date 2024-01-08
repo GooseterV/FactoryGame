@@ -801,7 +801,7 @@
         Anything layer 1 or higher has abs(mag) >= 15.954 and < 9e15.
         We will assume in calculations that all Decimals are either erroneous or satisfy these criteria. (Otherwise: Garbage in, garbage out.)
         */
-        if (this.sign === 0 || (this.mag === 0 && this.layer === 0))
+        if (this.sign === 0 || this.mag === 0 && this.layer === 0)
         {
           this.sign = 0;
           this.mag = 0;
@@ -1062,7 +1062,7 @@
           for (var i = 0; i < newparts[1].length; ++i)
           {
             var chrcode = newparts[1].charCodeAt(i);
-            if ((chrcode >= 43 && chrcode <= 57) || chrcode === 101) //is "0" to "9" or "+" or "-" or "." or "e" (or "," or "/")
+            if (chrcode >= 43 && chrcode <= 57 || chrcode === 101) //is "0" to "9" or "+" or "-" or "." or "e" (or "," or "/")
             {
               layerstring += newparts[1].charAt(i);
             }
@@ -1094,7 +1094,7 @@
         //Handle numbers written like eee... (N es) X
         if (!isFinite(mantissa))
         {
-          this.sign = (parts[0] === "-") ? -1 : 1;
+          this.sign = parts[0] === "-" ? -1 : 1;
           this.layer = ecount;
           this.mag = exponent;
         }
@@ -1194,7 +1194,7 @@
       Decimal.prototype.toString = function () {
         if (this.layer === 0)
         {
-          if ((this.mag < 1e21 && this.mag > 1e-7) || this.mag === 0)
+          if (this.mag < 1e21 && this.mag > 1e-7 || this.mag === 0)
           {
             return (this.sign*this.mag).toString();
           }
@@ -1257,7 +1257,7 @@
       Decimal.prototype.toStringWithDecimalPlaces = function (places) {
         if (this.layer === 0)
         {
-          if ((this.mag < 1e21 && this.mag > 1e-7) || this.mag === 0)
+          if (this.mag < 1e21 && this.mag > 1e-7 || this.mag === 0)
           {
             return (this.sign*this.mag).toFixed(places);
           }
@@ -1365,13 +1365,13 @@
         if (decimal.sign === 0) { return this; }
         
         //Special case - Adding a number to its negation produces 0, no matter how large.
-        if (this.sign === -(decimal.sign) && this.layer === decimal.layer && this.mag === decimal.mag) { return FC_NN(0, 0, 0); }
+        if (this.sign === -decimal.sign && this.layer === decimal.layer && this.mag === decimal.mag) { return FC_NN(0, 0, 0); }
         
         var a;
         var b;
         
         //Special case: If one of the numbers is layer 2 or higher, just take the bigger number.
-        if ((this.layer >= 2 || decimal.layer >= 2)) { return this.maxabs(decimal); }
+        if (this.layer >= 2 || decimal.layer >= 2) { return this.maxabs(decimal); }
         
         if (Decimal.cmpabs(this, decimal) > 0)
         {
@@ -1401,7 +1401,7 @@
           else
           {
             var magdiff = Math.pow(10, Math.log10(a.mag)-b.mag);
-            var mantissa = (b.sign)+(a.sign*magdiff);
+            var mantissa = b.sign+a.sign*magdiff;
             return FC(Math.sign(mantissa), 1, b.mag+Math.log10(Math.abs(mantissa)));
           }
         }
@@ -1415,7 +1415,7 @@
           else
           {
             var magdiff = Math.pow(10, a.mag-Math.log10(b.mag));
-            var mantissa = (b.sign)+(a.sign*magdiff);
+            var mantissa = b.sign+a.sign*magdiff;
             return FC(Math.sign(mantissa), 1, Math.log10(b.mag)+Math.log10(Math.abs(mantissa)));
           }
         }
@@ -1427,7 +1427,7 @@
         else
         {
           var magdiff = Math.pow(10, a.mag-b.mag);
-          var mantissa = (b.sign)+(a.sign*magdiff);
+          var mantissa = b.sign+a.sign*magdiff;
           return FC(Math.sign(mantissa), 1, b.mag+Math.log10(Math.abs(mantissa)));
         }
         
@@ -1467,7 +1467,7 @@
         var b;
         
         //Which number is bigger in terms of its multiplicative distance from 1?
-        if ((this.layer > decimal.layer) || (this.layer == decimal.layer && Math.abs(this.mag) > Math.abs(decimal.mag)))
+        if (this.layer > decimal.layer || this.layer == decimal.layer && Math.abs(this.mag) > Math.abs(decimal.mag))
         {
           a = this;
           b = decimal;
@@ -1481,7 +1481,7 @@
         if (a.layer === 0 && b.layer === 0) { return D(a.sign*b.sign*a.mag*b.mag); }
         
         //Special case: If one of the numbers is layer 3 or higher or one of the numbers is 2+ layers bigger than the other, just take the bigger number.
-        if (a.layer >= 3 || (a.layer - b.layer >= 2)) { return FC(a.sign*b.sign, a.layer, a.mag); }
+        if (a.layer >= 3 || a.layer - b.layer >= 2) { return FC(a.sign*b.sign, a.layer, a.mag); }
   
         if (a.layer === 1 && b.layer === 0)
         { 
@@ -1919,7 +1919,7 @@
           
           var t = this.mag - 1;
           var l = 0.9189385332046727; //0.5*Math.log(2*Math.PI)
-          l = (l+((t+0.5)*Math.log(t)));
+          l = l+((t+0.5)*Math.log(t));
           l = l-t;
           var n2 = t*t;
           var np = t;
@@ -2072,7 +2072,7 @@
         var fraction = fulltimes - times;
         if (result.layer - base.layer > 3)
         {
-          var layerloss = Math.min(times, (result.layer - base.layer - 3));
+          var layerloss = Math.min(times, result.layer - base.layer - 3);
           times -= layerloss;
           result.layer -= layerloss;
         }
@@ -2113,7 +2113,7 @@
         var copy = D(this);
         if (copy.layer - base.layer > 3)
         {
-          var layerloss = (copy.layer - base.layer - 3);
+          var layerloss = copy.layer - base.layer - 3;
           result += layerloss;
           copy.layer -= layerloss;
         }
@@ -2381,7 +2381,7 @@
       {
         ew = Decimal.exp(-w);
         wewz = w.sub(z.mul(ew));
-        wn = w.sub(wewz.div(w.add(1).sub((w.add(2)).mul(wewz).div((Decimal.mul(2, w).add(2))))));
+        wn = w.sub(wewz.div(w.add(1).sub((w.add(2)).mul(wewz).div(Decimal.mul(2, w).add(2)))));
         if (Decimal.abs(wn.sub(w)).lt(Decimal.abs(wn).mul(tol)))
         {
           return wn;

@@ -1,20 +1,20 @@
+// noinspection SpellCheckingInspection,JSUnresolvedFunction
+
 class Factory {
 
     constructor(name) {
         this.name = name;
-        this.money = 0;
+        this.money = ExpantaNum(0);
         this.multiplier = 1;
         this.level = 1;
-        this.multiUpgradePrice = 25;
-        this.levelUpgradePrice = 50;
-        this.gainAmount = 1;
+        this.multiUpgradePrice = ExpantaNum(25);
+        this.levelUpgradePrice = ExpantaNum(50);
+        this.gainAmount = ExpantaNum(1);
         this.gainInterval = 100;
-        this.speedUpgradePrice = 1e3
+        this.speedUpgradePrice = ExpantaNum(1000);
         this.isActive = false;
-        this.totalCash = 0;
-        this.achievements = [
-
-        ]
+        this.totalCash = ExpantaNum(0);
+        this.achievements = [];
         this.stats = {
             "name": this.name,
             "money": this.money,
@@ -22,8 +22,8 @@ class Factory {
             "level": this.level,
             "gainAmount": this.gainAmount,
             "gainInterval": this.gainInterval,
-            "totalCash":this.totalCash,
-            "achievements":this.achievements,
+            "totalCash": this.totalCash,
+            "achievements": this.achievements,
             "prices": {
                 "level": this.levelUpgradePrice,
                 "multiplier": this.multiUpgradePrice,
@@ -34,70 +34,55 @@ class Factory {
 
 
     GainMoney(cash) {
-        this.money += cash * this.multiplier
-        this.totalCash += cash * this.multiplier
-    }
-
-    LooseMoney(cash) {
-        this.money -= cash
+        this.money = this.money.add(cash.mul(this.multiplier));
+        this.totalCash = this.totalCash.add(cash.mul(this.multiplier));
     }
 
     UpgradeMultiplier() {
-        this.money -= this.multiUpgradePrice
-        this.multiplier += 1
-        if (this.money < 1e+14) {
-            this.multiUpgradePrice *= 4
-        }
-        if (this.money >= 1e+14) {
-            this.multiUpgradePrice *= 8
-        }
-    }
-    UpgradeLevel() {
-        this.money -= this.levelUpgradePrice
-        this.level += 1
-        if (this.gainAmount == 1) {
-            this.gainAmount = 2
-        }
-
-        if (this.money < 1e9) {
-            this.gainAmount **= 1.380
-            this.levelUpgradePrice **= 1.21
-
-        } else if (this.money >= 1e12 && this.money < 1e20) {
-            this.gainAmount **= 1.3825
-            this.levelUpgradePrice **= 1.275
-        } else if (this.money >= 1e20) {
-            this.gainAmount **= 1.3485
-            this.levelUpgradePrice **= 1.315
+        this.money = this.money.sub(this.multiUpgradePrice);
+        this.multiplier++;
+        if (this.money.gte(1e14)) {
+            this.multiUpgradePrice = this.multiUpgradePrice.mul(8);
         } else {
-            this.gainAmount **= 1.4
-            this.levelUpgradePrice **= 1.275
+            this.multiUpgradePrice = this.multiUpgradePrice.mul(4);
         }
     }
-    UpgradeSpeed() {
-        this.money -= this.speedUpgradePrice
-        this.speedUpgradePrice **= 1.5
-        this.gainInterval /= 1.25
 
+    UpgradeLevel() {
+        this.money = this.money.sub(this.levelUpgradePrice);
+        this.level++;
+        if (this.gainAmount.eq(1)) {
+            this.gainAmount = ExpantaNum(2);
+        }
+        this.gainAmount = this.gainAmount.pow(1.2);
+        // this.gainAmount = this.gainAmount.pow(ExpantaNum(0.4).div(this.money.slog(10).div(200).add(1)).add(1));
+        this.levelUpgradePrice = this.levelUpgradePrice.pow(1.21);
+    }
+
+    UpgradeSpeed() {
+        this.money = this.money.sub(this.speedUpgradePrice);
+        this.speedUpgradePrice = this.speedUpgradePrice.pow(1.5);
+        this.gainInterval /= 1.25;
     }
 }
 
-var name_factory_input = prompt("What is the name of your factory?").slice(0, 25)
-//name_factory_input = name_factory_input[0].toUpperCase() + name_factory_input.slice(1);
-let factory = new Factory(`${name_factory_input}`);
+let name_factory_input = prompt("What is the name of your factory?");
+if (name_factory_input.length > 27) name_factory_input = `${name_factory_input.slice(0, 25)}...`;
+let factory = new Factory(String(name_factory_input));
+
 //let factory = new Factory("Goose's Factory");
 async function createFactory() {
-    var factory_name_txt = document.getElementById("factory-name");
-    var title = document.getElementsByTagName("title")[0];
-    factory_name_txt.textContent = factory.name
+    const factory_name_txt = document.getElementById("factory-name");
+    const title = document.getElementsByTagName("title")[0];
+    factory_name_txt.textContent = factory.name;
 
-    title.textContent = `${factory.name} | GFG`
+    title.textContent = `${factory.name} | GFG`;
     factory.isActive = true;
-    if (!("hello-world-achievement" in factory.achievements))  {
-        factory.achievements.push("hello-world-achievement")
+    if (!("hello-world-achievement" in factory.achievements)) {
+        factory.achievements.push("hello-world-achievement");
     }
     while (factory.isActive) {
-        factory.GainMoney(factory.stats.gainAmount)
+        factory.GainMoney(factory.stats.gainAmount);
         factory.stats = {
             "name": factory.name,
             "money": factory.money,
@@ -105,51 +90,42 @@ async function createFactory() {
             "level": factory.level,
             "gainAmount": factory.gainAmount,
             "gainInterval": factory.gainInterval,
-            "totalCash":factory.totalCash,
-            "achievements":factory.achievements,
+            "totalCash": factory.totalCash,
+            "achievements": factory.achievements,
             "prices": {
                 "level": factory.levelUpgradePrice,
                 "multiplier": factory.multiUpgradePrice,
                 "speed": factory.speedUpgradePrice
             }
         }
-        var prog = document.getElementById("upgrade-progress")
-        var money_txt = document.getElementsByClassName("money-count-text")[0];
-        var progtext = `Next Level: ${factory.level+1}<br>Money: \$${String(toNumberName(Math.round(factory.money), "default", true, 1)).replace(" ", "").toLowerCase()}/\$${String(toNumberName(Math.round(factory.levelUpgradePrice), "default", true, 1)).replace(" ", "").toLowerCase()}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${String(toNumberName(Math.round(factory.money), "default", true, 1)).replace(" ", "").toLowerCase()}/\$${String(toNumberName(Math.round(factory.multiUpgradePrice), "default", true, 1)).replace(" ", "").toLowerCase()}`
-        if (Math.round(factory.money) < 1e+21) {
-            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).toLowerCase()}`
-            prog.innerHTML = progtext
-        } else {
-            //var progtext = `Next Level: ${factory.level+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.levelUpgradePrice)).format('0.0a')}<br><br>Next Multiplier: ${factory.multiplier+1}<br>Money: \$${numeral(Math.round(factory.money)).format('0.0a')}/\$${numeral(Math.round(factory.multiUpgradePrice)).format('0.0a')}`
-            money_txt.textContent = `\$${toNumberName(Math.round(factory.money), "default", false, 2).toLowerCase()}`
-            prog.innerHTML = progtext
-        }
+		
+        document.getElementsByClassName("money-count-text")[0].textContent = `$${numberName(factory.money, false, true, 2).toLowerCase()}`;
+
+        document.getElementById("upgrade-progress").innerHTML = `Next Level: ${factory.level + 1}<br>Money: $${String(numberName(factory.money, true, true, 1)).replace(" ", "").toLowerCase()}/$${String(numberName(factory.levelUpgradePrice, true, true, 1)).replace(" ", "").toLowerCase()} (${timeUntilUpgrade('level')})<br><br>Next Multiplier: ${factory.multiplier + 1}<br>Money: $${String(numberName(factory.money, true, true, 1)).replace(" ", "").toLowerCase()}/$${String(numberName(factory.multiUpgradePrice, true, true, 1)).replace(" ", "").toLowerCase()} (${timeUntilUpgrade('multiplier')})<br><br>Next Speed: ${Math.round(factory.gainInterval / 1.25) !== 0 ? Math.round(factory.gainInterval / 1.25) : "<1"}ms<br>Money: $${String(numberName(factory.money, true, true, 1)).replace(" ", "").toLowerCase()}/$${String(numberName(factory.speedUpgradePrice, true, true, 1)).replace(" ", "").toLowerCase()} (${timeUntilUpgrade('speed')})`;
+		
         if (document.getElementById("factory-create-button") != null) {
             document.getElementById("factory-create-button").remove();
         }
-        var btns = document.getElementsByTagName("button")
+        const btns = document.getElementsByTagName("button");
         for (let i = 0; i < btns.length; i++) {
-            if (btns[i].id == "multi-upgrade-button") {
-                if (factory.money < factory.multiUpgradePrice) {
+            if (btns[i].id === "multi-upgrade-button") {
+                if (factory.money.lt(factory.multiUpgradePrice)) {
                     btns[i].className = "expensive";
-                }
-                if (factory.money >= factory.multiUpgradePrice) {
+                } else {
                     btns[i].className = "purchaseable";
                 }
             }
-            if (btns[i].id == "level-upgrade-button") {
-                if (factory.money < factory.levelUpgradePrice) {
+            if (btns[i].id === "level-upgrade-button") {
+                if (factory.money.lt(factory.levelUpgradePrice)) {
                     btns[i].className = "expensive";
-                }
-                if (factory.money >= factory.levelUpgradePrice) {
+                } else {
                     btns[i].className = "purchaseable";
                 }
             }
-            if (btns[i].id == "speed-upgrade-button") {
-                if (factory.money < factory.speedUpgradePrice) {
+            if (btns[i].id === "speed-upgrade-button") {
+                if (factory.money.lt(factory.speedUpgradePrice)) {
                     btns[i].className = "expensive";
-                }
-                if (factory.money >= factory.speedUpgradePrice) {
+                } else {
                     btns[i].className = "purchaseable";
                 }
             }
@@ -157,22 +133,21 @@ async function createFactory() {
         let rndNum = getRndInteger(0, 1000);
         let notifier = document.getElementsByClassName("notifier")[0];
         if (rndNum >= 995) {
-            notifier.id = "gain15%"
-            notifier.children[0].innerHTML = "Gain 15% of current money?"
-        }
-        else if (rndNum == 500) {
-            notifier.id = "gain50%"
-            notifier.children[0].innerHTML = "Gain 50% of current money?"
+            notifier.id = "gain15%";
+            notifier.children[0].innerHTML = "Gain 15% of current money?";
+        } else if (rndNum === 500) {
+            notifier.id = "gain50%";
+            notifier.children[0].innerHTML = "Gain 50% of current money?";
         }
         if (!("monopoly-man-achievement" in factory.achievements)) {
-            if (factory.totalCash >= 1e9) {
-                factory.achievements.push("monopoly-man-achievement")
-            } 
+            if (factory.totalCash.gte(1e9)) {
+                factory.achievements.push("monopoly-man-achievement");
+            }
         }
         if (!("infinity-achievement" in factory.achievements)) {
-            if (factory.money > 1e308) {
-                factory.achievements.push("infinity-achievement")
-            } 
+            if (factory.money.gt(1e308)) {
+                factory.achievements.push("infinity-achievement");
+            }
         }
         await new Promise(resolve => setTimeout(resolve, factory.gainInterval));
 
@@ -180,251 +155,262 @@ async function createFactory() {
 }
 
 function upgradeFactory(btn) {
-    var stats = document.getElementById("stat-tracker");
-    var warning = document.getElementById("warning-message");
-    var cashinterval = document.getElementById("cash-interval");
-    if (btn.id == "multi-upgrade-button") {
-        if (factory.money < factory.multiUpgradePrice) {
+    const stats = document.getElementById("stat-tracker");
+    const warning = document.getElementById("warning-message");
+    const cashinterval = document.getElementById("cash-interval");
+    if (btn.id === "multi-upgrade-button") {
+        if (factory.money.lt(factory.multiUpgradePrice)) {
             //alert(`Not enough money! You need ${Math.round(factory.multiUpgradePrice - factory.money)} more dollars!`)
-            warning.style.display = "block"
-        }
-        if (factory.money >= factory.multiUpgradePrice) {
-            factory.UpgradeMultiplier()
+            //warning.style.display = "block"
+        } else {
+            factory.UpgradeMultiplier();
         }
     }
-    if (btn.id == "level-upgrade-button") {
-        if (factory.money < factory.levelUpgradePrice) {
+    if (btn.id === "level-upgrade-button") {
+        if (factory.money.lt(factory.levelUpgradePrice)) {
             //alert(`Not enough money! You need ${Math.round(factory.levelUpgradePrice - factory.money)} more dollars!`)
-            warning.style.display = "block"
-        }
-        if (factory.money >= factory.levelUpgradePrice) {
-            factory.UpgradeLevel()
+            //warning.style.display = "block"
+        } else {
+            factory.UpgradeLevel();
         }
 
     }
-    if (btn.id == "speed-upgrade-button") {
-        if (factory.money < factory.speedUpgradePrice) {
+    if (btn.id === "speed-upgrade-button") {
+        if (factory.money.lt(factory.speedUpgradePrice)) {
             //alert(`Not enough money! You need ${Math.round(factory.levelUpgradePrice - factory.money)} more dollars!`)
-            warning.style.display = "block"
-        }
-        if (factory.money >= factory.speedUpgradePrice) {
-            factory.UpgradeSpeed()
+            //warning.style.display = "block"
+        } else {
+            factory.UpgradeSpeed();
         }
 
     }
-    stats.textContent = `Level: ${factory.level} Multiplier: ${factory.multiplier}`
-    cashinterval.textContent = `Cash Per Interval: \$${toNumberName(Math.round(factory.gainAmount * factory.multiplier), "default", true, 1).replace(" ", "")}/${Math.round(factory.gainInterval)}ms`
-    if (factory.level == 42) {
+    stats.textContent = `Level: ${factory.level} Multiplier: ${factory.multiplier}`;
+    cashinterval.textContent = `Cash Per Interval: $${numberName(factory.gainAmount.mul(factory.multiplier), true, true, 1).replace(" ", "").toLowerCase()}/${Math.round(factory.gainInterval) !== 0 ? Math.round(factory.gainInterval) : "<1"}ms`;
+    if (factory.level === 42) {
         if (!("the-answer-achievement" in factory.achievements)) {
-            factory.achievements.push("the-answer-achievement")
+            factory.achievements.push("the-answer-achievement");
         }
     }
 }
 
 async function removeWarning(warning) {
-    warning.parentElement.style.opacity = '0';
+    warning.parentElement.style.opacity = "0";
     await new Promise(resolve => setTimeout(resolve, 600));
-    warning.parentElement.style.display = 'none';
-    warning.parentElement.style.opacity = '1';
+    warning.parentElement.style.display = "none";
+    warning.parentElement.style.opacity = "1";
 }
 
 async function exportStats(parent) {
-    var statFile = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(factory.stats));
-    var downloadLink = parent.children[0];
+    const statFile = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(factory.stats))}`;
+    const downloadLink = parent.children[0];
     downloadLink.href = statFile;
-    var d = new Date()
+    const d = new Date();
     downloadLink.download = `${factory.name}factoryStats-${d}.json`;
-    downloadLink.innerHTML = 'Export Stats (Raw JSON)';
+    downloadLink.innerHTML = "Export Stats (Raw JSON)";
 
 }
 
 
-
 const getJsonUpload = () =>
-  new Promise(resolve => {
-    const inputFileElement = document.createElement('input')
-    inputFileElement.setAttribute('type', 'file')
-    inputFileElement.setAttribute('multiple', 'true')
-    inputFileElement.setAttribute('accept', '.json')
-    
-    inputFileElement.addEventListener(
-      'change',
-      async (event) => {
-        const { files } = event.target
-        if (!files) {
-          return
-        }
+    new Promise(resolve => {
+        const inputFileElement = document.createElement('input');
+        inputFileElement.setAttribute('type', 'file');
+        inputFileElement.setAttribute('multiple', 'true');
+        inputFileElement.setAttribute('accept', '.json');
 
-        const filePromises = [...files].map(file => file.text())
+        inputFileElement.addEventListener(
+            'change',
+            async event => {
+                const {files} = event.target;
+                if (!files) {
+                    return;
+                }
 
-        resolve(await Promise.all(filePromises))
-      },
-      false,
-    )
-    inputFileElement.click()
-})
+                const filePromises = [...files].map(file => file.text());
 
-
+                resolve(await Promise.all(filePromises));
+            },
+            false
+        )
+        inputFileElement.click();
+    })
 
 
 async function uploadJson() {
-    const jsonFiles = await getJsonUpload()
-    const jsonStats = JSON.parse(jsonFiles[0])
-    factory.stats = jsonStats
-    factory.name =  jsonStats["name"]
-    factory.money = jsonStats["money"]
-    factory.level = jsonStats["level"]
-    factory.multiplier = jsonStats["multiplier"]
-    factory.gainAmount = jsonStats["gainAmount"]
-    factory.gainInterval = jsonStats["gainInterval"]
-    factory.levelUpgradePrice = jsonStats["prices"]["level"]
-    factory.multiUpgradePrice = jsonStats["prices"]["multiplier"]
-    factory.speedUpgradePrice = jsonStats["prices"]["speed"]
-    var factory_name_txt = document.getElementById("factory-name");
-    var title = document.getElementsByTagName("title")[0];
-    factory_name_txt.textContent = factory.name
-    title.textContent = `${factory.name} | GFG`
+    const jsonFiles = await getJsonUpload();
+    const jsonStats = JSON.parse(jsonFiles[0]);
+    factory.stats = jsonStats;
+    factory.name = jsonStats.name;
+    factory.money = ExpantaNum(jsonStats.money);
+    factory.level = jsonStats.level;
+    factory.multiplier = jsonStats.multiplier;
+    factory.gainAmount = ExpantaNum(jsonStats.gainAmount);
+    factory.gainInterval = jsonStats.gainInterval;
+    factory.levelUpgradePrice = ExpantaNum(jsonStats.prices.level);
+    factory.multiUpgradePrice = ExpantaNum(jsonStats.prices.multiplier);
+    factory.speedUpgradePrice = ExpantaNum(jsonStats.prices.speed);
+    const factory_name_txt = document.getElementById("factory-name");
+    const title = document.getElementsByTagName("title")[0];
+    factory_name_txt.textContent = factory.name;
+    title.textContent = `${factory.name} | GFG`;
 }
 
 async function changeTheme(theme) {
     const themes = {
-        "festive":{
-            "background":"festive-bg",
-            "box":"festive-box"
+        "festive": {
+            "background": "festive-bg",
+            "box": "festive-box"
         },
-        "default":{
-            "background":"default",
-            "box":"default-box"
+        "default": {
+            "background": "default",
+            "box": "default-box"
         },
-        "spooky":{
-            "background":"spooky-bg",
-            "box":"spooky-box"
+        "spooky": {
+            "background": "spooky-bg",
+            "box": "spooky-box"
         }
     }
     const themeBackground = document.getElementsByClassName("theme-background")[0];
     const themeBox = document.getElementById("theme-box");
-    themeBackground.id = themes[theme]["background"]
-    themeBox.className = themes[theme]["box"]
-    if (theme == "festive") {
+    themeBackground.id = themes[theme]["background"];
+    themeBox.className = themes[theme]["box"];
+    if (theme === "festive") {
         particlesjs = document.createElement("div");
         document.body.insertBefore(particlesjs, themeBackground);
         themeBackground.style.display = "none";
         particlesjs.id = "particles-js";
-        var s1 = document.createElement("script");
-        s1.src = "./js/particles.js"
-        var s2 = document.createElement("script");
-        s2.src = "./js/app.js"
-        document.body.appendChild(s1)
-        document.body.appendChild(s2)
-    }
-    else if (theme != "festive") {
-        const particlesjs = document.getElementById("particles-js")
+        const s1 = document.createElement("script");
+        s1.src = "./js/particles.js";
+        const s2 = document.createElement("script");
+        s2.src = "./js/app.js";
+        document.body.appendChild(s1);
+        document.body.appendChild(s2);
+    } else if (theme !== "festive") {
+        const particlesjs = document.getElementById("particles-js");
         if (particlesjs != null) {
-            particlesjs.remove()
-            document.body.removeChild(document.body.lastElementChild)
-            document.body.removeChild(document.body.lastElementChild)
+            particlesjs.remove();
+            document.body.removeChild(document.body.lastElementChild);
+            document.body.removeChild(document.body.lastElementChild);
         }
-        if (theme == "default") {
-            document.body.style = "background: linear-gradient(343deg, rgba(0,0,0,1) 0%, rgba(0, 0, 0, 1) 65%);"
-        }
-        else if (theme == "spooky") {
-            document.body.style= "background: linear-gradient(343deg, rgba(0,0,0,1) 0%, rgba(93,22,16,0.9304096638655462) 65%);"
+        if (theme === "default") {
+            document.body.style.background = "linear-gradient(343deg, rgba(0,0,0,1) 0%, rgba(0, 0, 0, 1) 65%)";
+        } else if (theme === "spooky") {
+            document.body.style.background = "linear-gradient(343deg, rgba(0,0,0,1) 0%, rgba(93,22,16,0.9304096638655462) 65%)";
         }
     }
-    
-}
 
-function percentage(percent, total) {
-    return (percent / 100) * total 
 }
-
 function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function claimRewards(reward) {
-    var notifier = document.getElementsByClassName("notifier")[0];
-    if (reward == "gain15%") {
-        factory.money += percentage(15, factory.money)
-        factory.totalCash += percentage(15, factory.money)
-        notifier.children[0].innerHTML = "No new alerts"
-        notifier.id = ""
-    }
-    else if (reward == "gain50%") {
-        factory.money += percentage(50, factory.money)
-        factory.totalCash += percentage(50, factory.money)
-        notifier.children[0].innerHTML = "No new alerts"
-        notifier.id = ""
-    }
-    else if (reward == "") {
+    const notifier = document.getElementsByClassName("notifier")[0];
+    if (reward === "gain15%") {
+        factory.totalCash = factory.totalCash.add(factory.money.mul(0.15));
+        factory.money = factory.money.mul(1.15);
+        notifier.children[0].innerHTML = "No new alerts";
+        notifier.id = "";
+    } else if (reward === "gain50%") {
+        factory.totalCash = factory.totalCash.add(factory.money.mul(0.5));
+        factory.money = factory.money.mul(1.5);
+        notifier.children[0].innerHTML = "No new alerts";
+        notifier.id = "";
+    } else if (reward === "") {
         // pass
     }
 }
 
 function changeTab(selectedTab) {
-    let mainBox = document.getElementById("theme-box")
-    let factoryTab = document.getElementById("factory-tab")
-    let achievementTab = document.getElementById("achievements-tab")
-    let creditsTab = document.getElementById("credits-tab")
-    let factoryButtons = document.getElementById("factory-buttons")
-    let achievementsButton = document.getElementById("achievements-button")
-    let sAchievementsButton = document.getElementById("save-achievements-button")
-    let warning2 = document.getElementById("notification-friendly")
-    let warning = document.getElementById("warning-message")
-    if (selectedTab == "factory") {
-        factoryTab.style.display = "block"
-        creditsTab.style.display = "none"
-        achievementTab.style.display = "none"
-        factoryButtons.style.display = "block"
-        achievementsButton.style.display = "none"
-        sAchievementsButton.style.display = "none"
-    }
-    else if (selectedTab == "achievements") {
-        factoryTab.style.display = "none"
-        creditsTab.style.display = "none"
-        achievementTab.style.display = "block"
-        factoryButtons.style.display = "none"
-        achievementsButton.style.display = "inline"
-        sAchievementsButton.style.display = "inline"
-        warning.style.display = "none"
-        warning2.style.display = "none"
+    document.getElementById("theme-box");
+    let factoryTab = document.getElementById("factory-tab");
+    let achievementTab = document.getElementById("achievements-tab");
+    let creditsTab = document.getElementById("credits-tab");
+    let factoryButtons = document.getElementById("factory-buttons");
+    let achievementsButton = document.getElementById("achievements-button");
+    let sAchievementsButton = document.getElementById("save-achievements-button");
+    let warning2 = document.getElementById("notification-friendly");
+    let warning = document.getElementById("warning-message");
+    if (selectedTab === "factory") {
+        factoryTab.style.display = "block";
+        creditsTab.style.display = "none";
+        achievementTab.style.display = "none";
+        factoryButtons.style.display = "block";
+        achievementsButton.style.display = "none";
+        sAchievementsButton.style.display = "none";
+    } else if (selectedTab === "achievements") {
+        factoryTab.style.display = "none";
+        creditsTab.style.display = "none";
+        achievementTab.style.display = "block";
+        factoryButtons.style.display = "none";
+        achievementsButton.style.display = "inline";
+        sAchievementsButton.style.display = "inline";
+        warning.style.display = "none";
+        warning2.style.display = "none";
 
-    }
-    else if (selectedTab == "credits") {
-        factoryTab.style.display = "none"
-        achievementTab.style.display = "none"
-        creditsTab.style.display = "block"
-        factoryButtons.style.display = "none"
-        achievementsButton.style.display = "none"
-        sAchievementsButton.style.display = "none"
-        warning.style.display = "none"
-        warning2.style.display = "none"
+    } else if (selectedTab === "credits") {
+        factoryTab.style.display = "none";
+        achievementTab.style.display = "none";
+        creditsTab.style.display = "block";
+        factoryButtons.style.display = "none";
+        achievementsButton.style.display = "none";
+        sAchievementsButton.style.display = "none";
+        warning.style.display = "none";
+        warning2.style.display = "none";
     }
 }
 
 function timeUntilUpgrade(upgrade) {
-    let amountPerSecond = (factory.gainAmount * 1000) / factory.gainInterval
-    let amountRemaining = factory.stats["prices"][upgrade] - factory.money
-    let timeRemaining = amountRemaining / amountPerSecond
-    return `${Math.round(timeRemaining)} Seconds`
+	// 0.75
+    let amountPerSecond = factory.gainAmount.mul(1000).mul(factory.multiplier).div(factory.gainInterval);
+    let amountRemaining = factory.stats.prices[upgrade].sub(factory.money);
+    let timeRemaining = amountRemaining.div(amountPerSecond);
+	let count = 0;
+	if (timeRemaining.lt(0)) timeRemaining = ExpantaNum(0);
+	if (upgrade === "multiplier") {
+		let total = 0;
+		let arr = [1, 1.25, 1.3125, 1.328125, 1 / 0.75];
+		count = factory.money.div(factory.multiUpgradePrice).logBase(4).add(1);
+	}
+	const x = timeRemaining <= 0 ? "ready" : timeRemaining <= 1 ? "<1 sec" : convertTime(timeRemaining);
+    return (x[x.length - 1] === " " ? x.slice(0, x.length - 1) : x).toLowerCase();
 }
 
 async function alertTime() {
-    const friendlyNotice = document.getElementById("notification-friendly")
-    friendlyNotice.style.display = "block"
-    friendlyNotice.innerHTML = `<span class="closebtn" onclick="removeWarning(this)">&times;</span> ${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until mutliplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`
+    const friendlyNotice = document.getElementById("notification-friendly");
+    friendlyNotice.style.display = "block";
+    friendlyNotice.innerHTML = `<span class="closebtn" onclick="removeWarning(this)">&times;</span> ${timeUntilUpgrade('level')} until level upgrade, ${timeUntilUpgrade('multiplier')} until multiplier upgrade and ${timeUntilUpgrade('speed')} until speed upgrade`;
 }
 
 async function loadAchievements() {
-    factory.achievements = JSON.parse(localStorage.achievements)
+    factory.achievements = JSON.parse(localStorage.achievements);
     for (let achievementNum in factory.achievements) {
-        const achievementId = factory.achievements[achievementNum]
-        const achievement = document.getElementById(achievementId)
-        achievement.className = "achievement-unlocked"
-
+        const achievementId = factory.achievements[achievementNum];
+        const achievement = document.getElementById(achievementId);
+        achievement.className = "achievement-unlocked";
     }
 }
 
 async function saveAchievements() {
-    localStorage.achievements = JSON.stringify(factory.achievements)
+    localStorage.achievements = JSON.stringify(factory.achievements);
+}
+
+function convertTime(time) {
+	if (time === Infinity) {
+		return "Forever";
+	} else if (time >= 2 ** 53) {
+		return `${numberName(time / 31536000, false, true)} yr`;
+	} else if (time >= 31536000) {
+		return `${Math.floor(time / 31536000)} yr ${convertTime(time % 31536000)}`;
+	} else if (time >= 86400) {
+		return `${Math.floor(time / 86400)} d ${convertTime(time % 86400)}`;
+	} else if (time >= 3600) {
+		return `${Math.floor(time / 3600)} hr ${convertTime(time % 3600)}`;
+	} else if (time >= 60) {
+		return `${Math.floor(time / 60)} min ${convertTime(time % 60)}`;
+	} else if (time >= 1) {
+		return `${Math.floor(time)} sec ${convertTime(time % 1)}`;
+	} else {
+		return "";
+	}
 }

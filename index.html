@@ -1,159 +1,158 @@
-<html>
-
+<html lang="en">
 <head>
-    <script src="./js/toNumberName.js"></script>
-    <script src="./js/bundle.js"></script>
-    <script src="./js/ExpantaNum.js"></script>
-    <link rel="stylesheet" media="screen" href="./styles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="icon" href="./src/g_egg.png">
-    <title>Unowned Factory | GFG</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Factory, Factory Game, tycoon, Tycoon, Money, Game">
-    <meta property="og:url" content="https://gooseterv.github.io/FactoryGame/">
-    <meta content="#28fc84" data-react-helmet="true" name="theme-color">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Factory">
-    <meta property="og:title" content="Goose's Factory Game">
-    <meta property="og:description" content="Factory tycoon game made by Goose.">
-    <meta property="og:image" content="https://gooseterv.github.io/FactoryGame/src/g_egg.png">
+	<script src="./js/ExpantaNum.js"></script>
+	<script src="./js/numberName.js"></script>
+	<script src="./js/bundle.js"></script>
+	<link rel="stylesheet" media="screen" href="./styles.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+	<link rel="icon" href="./src/g_egg.png">
+	<title>Unowned Factory | GFG</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="Factory, Factory Game, tycoon, Tycoon, Money, Game">
+	<meta property="og:url" content="https://gooseterv.github.io/FactoryGame/">
+	<meta content="#28fc84" data-react-helmet="true" name="theme-color">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Factory">
+	<meta property="og:title" content="Goose's Factory Game">
+	<meta property="og:description" content="Factory tycoon game made by Goose.">
+	<meta property="og:image" content="https://gooseterv.github.io/FactoryGame/src/g_egg.png">
 </head>
-
 <body>
-    <div class="theme-background"></div>
-    <div class="tabs">
-        <button class="tablinks" onclick="changeTab('factory')">Factory</button>
-        <button class="tablinks" onclick="changeTab('achievements')">Achievements</button>
-        <button class="tablinks" onclick="changeTab('credits')">Credits</button>
-      </div>
-    <div class="alert" id="warning-message" style="display: none;">
-        <span class="closebtn" onclick="removeWarning(this)">&times;</span> Warning: You don't have enough money for
-        this!
-    </div>
-    <div class="alert-friendly" id="notification-friendly" style="display: none;">
-    </div>
-    <div class="default-box" id="theme-box">
-        <div id="factory-tab">
-            <div class="money-count-text" data-type="txt">$0</div>
-            <div class="stat-tracker" id="stat-tracker" data-type="txt">Level: 1 Multiplier: 1</div>
-            <div class="factory-name" id="factory-name" data-type="txt">Unowned Factory</div>
-            <div class="progress-tracker" id="upgrade-progress" data-type="txt">Next Level: 1<br>Money: $1/$1<br><br>Next
-                Multiplier: 1<br>Cost: $1/$1</div>
-            <div class="interval-counter" id="cash-interval" data-type="txt">Cash Per Interval: $1/100ms</div>
-            <button class="notifier" onclick="claimRewards(this.id)"><span>No new alerts</span></button>
-        </div>
-        <div id="achievements-tab" style="display: none;">
-            <div class="achievements-name-header">
-                Factory Achievements
-            </div>
-            <div class="achievements-box">
-                <div class="achievements-row">
-                    <div class="achievement-locked" id="hello-world-achievement">
+	<div class="theme-background"></div>
+	<div class="tabs">
+		<button class="tablinks" onclick="changeTab('factory')">Factory</button>
+		<button class="tablinks" onclick="changeTab('achievements')">Achievements</button>
+		<button class="tablinks" onclick="changeTab('credits')">Credits</button>
+	</div>
+	<div class="alert" id="warning-message" style="display: none;">
+		<span class="closebtn" onclick="removeWarning(this);">&times;</span> Warning: You don't have enough money for
+		this!
+	</div>
+	<div class="alert-friendly" id="notification-friendly" style="display: none;">
+	</div>
+	<div class="default-box" id="theme-box">
+		<div id="factory-tab">
+			<div class="money-count-text" data-type="txt">$0</div>
+			<div class="stat-tracker" id="stat-tracker" data-type="txt">Level: 1 Multiplier: 1</div>
+			<div class="factory-name" id="factory-name" data-type="txt">Unowned Factory</div>
+			<div class="progress-tracker" id="upgrade-progress" data-type="txt">
+				Next Level: 1<br>Money: $0.0/$50.0
+				<br><br>
+				Next Multiplier: 1<br>Cost: $0.0/$25.0
+				<br><br>
+				Next Speed: 80ms<br>Cost: $0.0/$1.0k
+			</div>
+			<div class="interval-counter" id="cash-interval" data-type="txt">Cash Per Interval: $1/100ms</div>
+			<button class="notifier" onclick="claimRewards(this.id)"><span>No new alerts</span></button>
+		</div>
+		<div id="achievements-tab" style="display: none;">
+			<div class="achievements-name-header">
+				Factory Achievements
+			</div>
+			<div class="achievements-box">
+				<div class="achievements-row">
+					<div class="achievement-locked" id="hello-world-achievement">
                         <span class="achievement-header">
                             Hello World
                         </span>
-                        </br>
-                        <span class="achievement-text">
+						<span class="achievement-text">
                             Make your first dollar
-                            </br></br>
-                            Reward: $25
+                        Reward: $25
                         </span>
-                    </div>
-                    <div class="achievement-locked" id="monopoly-man-achievement">
+					</div>
+					<div class="achievement-locked" id="monopoly-man-achievement">
                         <span class="achievement-header">
                             Monopoly Man
                         </span>
-                        </br>
-                        <span class="achievement-text">
+						<span class="achievement-text">
                             Earn a total of one billion dollars
-                            </br></br>
-                            Reward: <div class="tooltip" style="font-size: 13px;">Monocle and Tophat
+                        Reward: <div class="tooltip" style="font-size: 13px;">Monocle and Tophat
                                 <span class="tooltiptext" style="font-size: 17px;">Monocle and Tophat: +25% chance to gain $10k every 10 ticks.</span>
                               </div>
                         </span>
-                    </div>
-                    <div class="achievement-locked" id="the-answer-achievement">
+					</div>
+					<div class="achievement-locked" id="the-answer-achievement">
                         <span class="achievement-header" style="font-size: 16px;">
                             Life the Universe and Everything
                         </span>
-                        </br>
-                        <span class="achievement-text" style="font-size: 13px;">
+						<span class="achievement-text" style="font-size: 13px;">
                             Get level 42
-                            </br></br>
-                            Reward: ???
+                        Reward: ???
                         </span>
-                    </div>
-                    <div class="achievement-locked" id="infinity-achievement">
+					</div>
+					<div class="achievement-locked" id="infinity-achievement">
                         <span class="achievement-header">
                             Infinity and Beyond
                         </span>
-                        </br>
-                        <span class="achievement-text">
-                            Get past $1e308 
-                            </br></br>
-                            Reward: Infinity Theme
+						<span class="achievement-text">
+                            Get past $1e308
+                        Reward: Infinity Theme
                         </span>
-                    </div>
-                    <div class="secret-achievement">
-                        <i class="fas fa-lock fa-5x" style="position: relative; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="credits-tab" style="display:none;">
-            <div class="game-name" data-type="txt">Goose's Factory Game</div>
-            <div class="credits" data-type="txt" style="top:45%;">Inspired By: 
-                <a href="https://github.com/Dragon77mathbye/Layers-of-Infinity">
-                    Layers of Infinity
-                </a>
-                </br>
-                <div style="font-size: 37.5px; top: 20%; position:relative;">
-                    Number Simplification: 
-                    <a href="https://github.com/Dragon77mathbye/ToNumberName">
-                        ToNumberName.js
-                    </a>
-                </div>
-                <div style="font-size: 37.5px; top: 20%; position:relative;">
-                Holiday Particles: 
-                <a href="https://github.com/VincentGarreau/particles.js/">
-                    Particles.js
-                </a>
-                </div>
-                <div style="font-size: 37.5px; top: 20%; position:relative;">
-                Number Expansion: 
-                <a href="https://github.com/Naruyoko/ExpantaNum.js">
-                    ExpantaNum.js
-                </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="factory-buttons">
-        <button onClick="createFactory()" id="factory-create-button" class="purchaseable">Create Factory</button>
-        <button onClick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
-        <button onClick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
-        <button onClick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
-        <button onClick="alertTime()">Time Until Upgrades</button>
-        <button onClick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
-        <button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
-        <select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)" style="position:relative;">
-            <option value="default">Default</option>
-            <option value="festive">Festive</option>
-            <option value="spooky">Spooky</option>
-        </select>
-    </div>
-    <button onClick="loadAchievements()" id="achievements-button" style="
+					</div>
+					<div class="secret-achievement">
+						<i class="fas fa-lock fa-5x"
+						   style="position: relative; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="credits-tab" style="display:none;">
+			<div class="game-name" data-type="txt">Goose's Factory Game</div>
+			<div class="credits" data-type="txt" style="top:45%;">Inspired By:
+				<a href="https://github.com/Dragon77mathbye/Layers-of-Infinity">
+					Layers of Infinity
+				</a>
+				<br>
+				<div style="font-size: 37.5px; top: 20%; position:relative;">
+					Number Simplification:
+					<a href="https://github.com/Dragon77mathbye/ToNumberName">
+						ToNumberName.js
+					</a>
+				</div>
+				<div style="font-size: 37.5px; top: 20%; position:relative;">
+					Holiday Particles:
+					<a href="https://github.com/VincentGarreau/particles.js/">
+						Particles.js
+					</a>
+				</div>
+				<div style="font-size: 37.5px; top: 20%; position:relative;">
+					Number Expansion:
+					<a href="https://github.com/Naruyoko/ExpantaNum.js">
+						ExpantaNum.js
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="factory-buttons">
+		<button onclick="createFactory()" id="factory-create-button" class="purchaseable">Create Factory</button>
+		<button onclick="upgradeFactory(this)" id="multi-upgrade-button" class="expensive">Upgrade Multiplier</button>
+		<button onclick="upgradeFactory(this)" id="level-upgrade-button" class="expensive">Upgrade Level</button>
+		<button onclick="upgradeFactory(this)" id="speed-upgrade-button" class="expensive">Upgrade Speed</button>
+		<button onclick="alertTime()">Time Until Upgrades</button>
+		<button onclick="exportStats(this)"><a>Export Stats (Raw JSON)</a></button>
+		<button onclick="uploadJson()" id="importJson">Load Stats (Exported JSON)</button>
+		<select id="themeSelector" onchange="changeTheme(this.options[this.options.selectedIndex].value)"
+				style="position:relative;">
+			<option value="default">Default</option>
+			<option value="festive">Festive</option>
+			<option value="spooky">Spooky</option>
+		</select>
+	</div>
+	<button onclick="loadAchievements();" id="achievements-button" style="
     display:none; 
     top: 6.5%;
     left: 45%;
-    transform: translate(-50%, -50%);">Load Achievements</button>
-    <button onClick="saveAchievements()" id="save-achievements-button" style="
+    transform: translate(-50%, -50%);">Load Achievements
+	</button>
+	<button onclick="saveAchievements();" id="save-achievements-button" style="
     display:none; 
     top: 6.5%;
     left: 45%;
-    transform: translate(-50%, -50%);">Save Achievements</button>
-    <!-- <script src="./js/particles.js"></script> -->
-    <!-- <script src="./js/app.js"></script> -->
+    transform: translate(-50%, -50%);">Save Achievements
+	</button>
+	<!-- <script src="./js/particles.js"></script> -->
+	<!-- <script src="./js/app.js"></script> -->
 </body>
 
 </html>
