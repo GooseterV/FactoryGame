@@ -477,7 +477,7 @@
         if (n<24) return new ExpantaNum(f_gamma(x.sign*n));
         var t=n-1;
         var l=0.9189385332046727; //0.5*Math.log(2*Math.PI)
-        l+=((t+0.5)*Math.log(t));
+        l+=(t+0.5)*Math.log(t);
         l-=t;
         var n2=t*t;
         var np=t;
@@ -541,7 +541,7 @@
       if (this.max(other).gt(ExpantaNum.TETRATED_MAX_SAFE_INTEGER)) return this.max(other);
       if (this.eq(10)){
         if (other.gt(ExpantaNum.ZERO)){
-          other.operator(1,(other.operator(1)+1)||1);
+          other.operator(1,other.operator(1)+1||1);
           other.standardize();
           return other;
         }else{
@@ -659,7 +659,7 @@
       for (var i=0;i<100;++i){
         ew=ExpantaNum.exp(-w);
         wewz=w.sub(z.mul(ew));
-        wn=w.sub(wewz.div(w.add(ExpantaNum.ONE).sub((w.add(2)).mul(wewz).div((ExpantaNum.mul(2,w).add(2))))));
+        wn=w.sub(wewz.div(w.add(ExpantaNum.ONE).sub((w.add(2)).mul(wewz).div(ExpantaNum.mul(2,w).add(2)))));
         if (ExpantaNum.abs(wn.sub(w)).lt(ExpantaNum.abs(wn).mul(tol))) return wn;
         w = wn;
       }
@@ -755,7 +755,7 @@
         }
       }
       if (i==100||this.lt(Math.exp(1/Math.E))) f=0;
-      r.operator(1,(r.operator(1)+f)||f);
+      r.operator(1,r.operator(1)+f||f);
       r.standardize();
       return r;
     };
@@ -940,7 +940,7 @@
           }
         }
         if (i==100) f=0;
-        r.operator(Number(arrows.sub(ExpantaNum.ONE)),(r.operator(Number(arrows.sub(ExpantaNum.ONE)))+f)||f);
+        r.operator(Number(arrows.sub(ExpantaNum.ONE)),r.operator(Number(arrows.sub(ExpantaNum.ONE)))+f||f);
         r.standardize();
         return r;
       };

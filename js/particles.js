@@ -267,7 +267,7 @@ var pJS = function(tag_id, params){
   
       /* color */
       this.color = {};
-      if(typeof(color.value) == 'object'){
+      if(typeof color.value == 'object'){
   
         if(color.value instanceof Array){
           var color_selected = color.value[Math.floor(Math.random() * pJS.particles.color.value.length)];
@@ -292,12 +292,12 @@ var pJS = function(tag_id, params){
       }
       else if(color.value == 'random'){
         this.color.rgb = {
-          r: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-          g: (Math.floor(Math.random() * (255 - 0 + 1)) + 0),
-          b: (Math.floor(Math.random() * (255 - 0 + 1)) + 0)
+          r: Math.floor(Math.random() * (255 - 0 + 1)) + 0,
+          g: Math.floor(Math.random() * (255 - 0 + 1)) + 0,
+          b: Math.floor(Math.random() * (255 - 0 + 1)) + 0
         }
       }
-      else if(typeof(color.value) == 'string'){
+      else if(typeof color.value == 'string'){
         this.color = color;
         this.color.rgb = hexToRgb(this.color.value);
       }
@@ -348,8 +348,8 @@ var pJS = function(tag_id, params){
         this.vx = velbase.x;
         this.vy = velbase.y;
         if(pJS.particles.move.random){
-          this.vx = this.vx * (Math.random());
-          this.vy = this.vy * (Math.random());
+          this.vx = this.vx * Math.random();
+          this.vy = this.vy * Math.random();
         }
       }else{
         this.vx = velbase.x + Math.random()-0.5;
@@ -368,7 +368,7 @@ var pJS = function(tag_id, params){
       /* if shape is image */
   
       var shape_type = pJS.particles.shape.type;
-      if(typeof(shape_type) == 'object'){
+      if(typeof shape_type == 'object'){
         if(shape_type instanceof Array){
           var shape_selected = shape_type[Math.floor(Math.random() * shape_type.length)];
           this.shape = shape_selected;
@@ -682,7 +682,7 @@ var pJS = function(tag_id, params){
       /* draw a line between p1 and p2 if the distance between them is under the config distance */
       if(dist <= pJS.particles.line_linked.distance){
   
-        var opacity_line = pJS.particles.line_linked.opacity - (dist / (1/pJS.particles.line_linked.opacity)) / pJS.particles.line_linked.distance;
+        var opacity_line = pJS.particles.line_linked.opacity - dist / (1/pJS.particles.line_linked.opacity) / pJS.particles.line_linked.distance;
   
         if(opacity_line > 0){        
           
@@ -810,13 +810,13 @@ var pJS = function(tag_id, params){
             if(pJS.interactivity.modes.bubble.size != pJS.particles.size.value){
   
               if(pJS.interactivity.modes.bubble.size > pJS.particles.size.value){
-                var size = p.radius + (pJS.interactivity.modes.bubble.size*ratio);
+                var size = p.radius + pJS.interactivity.modes.bubble.size*ratio;
                 if(size >= 0){
                   p.radius_bubble = size;
                 }
               }else{
                 var dif = p.radius - pJS.interactivity.modes.bubble.size,
-                    size = p.radius - (dif*ratio);
+                    size = p.radius - dif*ratio;
                 if(size > 0){
                   p.radius_bubble = size;
                 }else{
@@ -887,7 +887,7 @@ var pJS = function(tag_id, params){
                 if(p_obj_bubble != undefined) var obj = p_obj_bubble;
                 else var obj = p_obj;
                 if(obj != bubble_param){
-                  var value = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration);
+                  var value = p_obj - time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration;
                   if(id == 'size') p.radius_bubble = value;
                   if(id == 'opacity') p.opacity_bubble = value;
                 }
@@ -897,7 +897,7 @@ var pJS = function(tag_id, params){
               }
             }else{
               if(p_obj_bubble != undefined){
-                var value_tmp = p_obj - (time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration),
+                var value_tmp = p_obj - time_spent * (p_obj - bubble_param) / pJS.interactivity.modes.bubble.duration,
                     dif = bubble_param - value_tmp;
                     value = bubble_param + dif;
                 if(id == 'size') p.radius_bubble = value;
@@ -1030,7 +1030,7 @@ var pJS = function(tag_id, params){
         /* draw a line between the cursor and the particle if the distance between them is under the config distance */
         if(dist_mouse <= pJS.interactivity.modes.grab.distance){
   
-          var opacity_line = pJS.interactivity.modes.grab.line_linked.opacity - (dist_mouse / (1/pJS.interactivity.modes.grab.line_linked.opacity)) / pJS.interactivity.modes.grab.distance;
+          var opacity_line = pJS.interactivity.modes.grab.line_linked.opacity - dist_mouse / (1/pJS.interactivity.modes.grab.line_linked.opacity) / pJS.interactivity.modes.grab.distance;
   
           if(opacity_line > 0){
   
@@ -1459,11 +1459,11 @@ var pJS = function(tag_id, params){
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;
-  };
+  }
   
   function clamp(number, min, max) {
     return Math.min(Math.max(number, min), max);
-  };
+  }
   
   function isInArray(value, array) {
     return array.indexOf(value) > -1;
@@ -1479,7 +1479,7 @@ var pJS = function(tag_id, params){
     //console.log(params);
   
     /* no string id? so it's object params, and set the id with default id */
-    if(typeof(tag_id) != 'string'){
+    if(typeof tag_id != 'string'){
       params = tag_id;
       tag_id = 'particles-js';
     }
